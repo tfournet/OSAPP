@@ -5,7 +5,7 @@ source /usr/local/osapp/osapp-vars.conf
 # Set Hostname
 #hostnamectl me.com
 
-rm -f ~/.ssh/known_hosts
+#rm -f ~/.ssh/known_hosts
 
 ## Delete existing physical interfaces
 echo "Clearing existing configs"
@@ -50,7 +50,6 @@ nmcli connection mod $bondName ipv4.method auto
 
 ## Overlay VLANs on top of bridged team
 echo "Configuring VLAN Bridges"
-VLAN_IDs=(10 20 30 40 50 60 70 100)
 for vlan in ${VLAN_IDs[@]}; do
    master=$bondName
    bridgeName=br.$vlan
@@ -84,8 +83,9 @@ echo "for $ifname to $ipaddr"
 #nmcli connection modify $ifname ifname $ifname dev $bondName id $vlan
 nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr ipv4.gateway $gateway
 nmcli connection modify $ifname ipv4.dns  $locdns
-nmcli connection modify $ifname +ipv4.dns '208.67.222.222'
-nmcli connection modify $ifname +ipv4.dns '208.67.220.220'
+for dns_server in ${Allowed_DNS[@]}; do
+    nmcli connection modify $ifname +ipv4.dns $dns_server
+done
 nmcli connection down   $ifname
 nmcli connection up     $ifname 
 

@@ -34,7 +34,7 @@ virt-v2v -i ova /tmp/perch/perch_sensor.ova -of qcow2 -os $vpool -on $Perch_VMNa
 
 
 
-sed -e "s/MONITOR_PORT=.*/MONITOR_PORT=\"br-$nicBondType"0"\"/g" /usr/local/osapp/perch_monitor.sh > /usr/local/bin/perch_monitor.sh
+sed -e "s/MONITOR_PORT=.*/MONITOR_PORT=\"br-$nicBondType"0"\"/g" $osapp_inst/vm_setup/perch/perch_monitor.sh > /usr/local/bin/perch_monitor.sh
 chmod a+x /usr/local/bin/perch_monitor.sh
 
 grep -q "perch_monitor.sh" /etc/rc.local || echo "/usr/local/bin/perch_monitor.sh" >> /etc/rc.local
@@ -81,17 +81,17 @@ virt-sysprep   -d $Perch_VMName $inject
 
 perch_hostname="$custAbbr-$siteName-Perch"
 
-sed -ie "s/{{cwa_LocID}}/$cwa_LocID/g"     $osapp_inst/perch_firstboot.sh
-sed -ie "s/{{hostname}}/$perch_hostname/g" $osapp_inst/perch_firstboot.sh 
-sed -e  "s/{{sitesubnet}}/$siteSubnet/g"   $osapp_inst/perch_ifcfg-eth0 > /tmp/ifcfg-eth0
+sed -ie "s/{{cwa_LocID}}/$cwa_LocID/g"     $osapp_inst/vm_setup/perch/perch_firstboot.sh
+sed -ie "s/{{hostname}}/$perch_hostname/g" $osapp_inst/vm_setup/perch/perch_firstboot.sh 
+sed -e  "s/{{sitesubnet}}/$siteSubnet/g"   $osapp_inst/vm_setup/perch/perch_ifcfg-eth0 > /tmp/ifcfg-eth0
 
 virt-customize -d $Perch_VMName --copy-in /tmp/ifcfg-eth0:/etc/sysconfig/network-scripts/
-virt-customize -d $Perch_VMName --copy-in $osapp_inst/install-labtech.sh:/usr/local/bin/
-virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/install-labtech.sh
-virt-customize -d $Perch_VMName --copy-in $osapp_inst/perch_vxlan.sh:/usr/local/bin/
-virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/perch_vxlan.sh
-virt-customize -d $Perch_VMName --copy-in $osapp_inst/perch_firstboot.sh:/usr/local/bin/
-virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/perch_firstboot.sh
+virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/install-labtech.sh:/usr/local/bin/
+#virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/install-labtech.sh
+virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/perch/perch_vxlan.sh:/usr/local/bin/
+#virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/perch_vxlan.sh
+virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/perch/perch_firstboot.sh:/usr/local/bin/
+#virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/perch_firstboot.sh
 
 firstboot_cmds="/usr/local/bin/perch_firstboot.sh"
 virt-customize -d $Perch_VMName --firstboot-command "$firstboot_cmds"

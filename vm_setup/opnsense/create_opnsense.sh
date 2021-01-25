@@ -76,4 +76,4 @@ virsh start $OPNSense_VMName
 
 virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 
-#rm -rf /tmp/opnsense
+rm -rf /tmp/opnsense

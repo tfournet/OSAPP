@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 cwa_LocID=$1
 
 tmpdir="/tmp/cwa"
