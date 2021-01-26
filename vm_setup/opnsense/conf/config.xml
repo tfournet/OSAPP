@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <opnsense>
-  <theme>opnsense</theme>
+  <theme>rebellion</theme>
   <sysctl>
     <item>
       <descr>Increase UFS read-ahead speeds to match the state of hard drives and NCQ.</descr>
@@ -214,7 +214,7 @@
     <optimization>normal</optimization>
     <hostname>OPNsense</hostname>
     <domain>localdomain</domain>
-    <dnsallowoverride/>
+    <dnsallowoverride>1</dnsallowoverride>
     <group>
       <name>admins</name>
       <description>System Administrators</description>
@@ -228,7 +228,7 @@
       <descr>System Administrator</descr>
       <scope>system</scope>
       <groupname>admins</groupname>
-      <password>$2y$10$YRVoF4SgskIsrXOvOQjGieB9XqHPRra9R7d80B3BZdbY/j21TwBfS</password>
+      <password>$2y$10$Poo3UCgKcZ5UXG91i2MVoOdv3B2bcdp0F0CqWSvjr60s3i666fl7C</password>
       <uid>0</uid>
     </user>
     <nextuid>2000</nextuid>
@@ -283,11 +283,25 @@
         <backupdir>OPNsense-Backup</backupdir>
       </nextcloud>
     </backup>
+    <firmware>
+      <plugins>os-theme-rebellion</plugins>
+    </firmware>
+    <language>en_US</language>
+    <dnsallowoverride_exclude/>
+    <dnsserver/>
+    <dns1gw>none</dns1gw>
+    <dns2gw>none</dns2gw>
+    <dns3gw>none</dns3gw>
+    <dns4gw>none</dns4gw>
+    <dns5gw>none</dns5gw>
+    <dns6gw>none</dns6gw>
+    <dns7gw>none</dns7gw>
+    <dns8gw>none</dns8gw>
   </system>
   <interfaces>
     <wan>
       <enable>1</enable>
-      <if>vtnet1</if>
+      <if>vtnet9</if>
       <mtu/>
       <ipaddr>dhcp</ipaddr>
       <ipaddrv6>dhcp6</ipaddrv6>
@@ -349,6 +363,36 @@
     <outbound>
       <mode>automatic</mode>
     </outbound>
+    <rule>
+      <protocol>tcp</protocol>
+      <interface>wan</interface>
+      <ipprotocol>inet</ipprotocol>
+      <descr>Allow HTTPS Admin remotely</descr>
+      <tag/>
+      <tagged/>
+      <poolopts/>
+      <associated-rule-id>nat_60107bc9848bb5.33748748</associated-rule-id>
+      <log>1</log>
+      <target>192.168.1.1</target>
+      <local-port>443</local-port>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <network>(self)</network>
+        <port>2443</port>
+      </destination>
+      <updated>
+        <username>root@192.168.1.2</username>
+        <time>1611693001.543</time>
+        <description>/firewall_nat_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@192.168.1.2</username>
+        <time>1611693001.543</time>
+        <description>/firewall_nat_edit.php made changes</description>
+      </created>
+    </rule>
   </nat>
   <filter>
     <rule>
@@ -374,6 +418,26 @@
       <destination>
         <any/>
       </destination>
+    </rule>
+    <rule>
+      <source>
+        <any>1</any>
+      </source>
+      <interface>wan</interface>
+      <protocol>tcp</protocol>
+      <ipprotocol>inet</ipprotocol>
+      <destination>
+        <address>192.168.1.1</address>
+        <port>443</port>
+      </destination>
+      <log>1</log>
+      <descr>Allow HTTPS Admin remotely</descr>
+      <associated-rule-id>nat_60107bc9848bb5.33748748</associated-rule-id>
+      <created>
+        <username>root@192.168.1.2</username>
+        <time>1611693001.5429</time>
+        <description>/firewall_nat_edit.php made changes</description>
+      </created>
     </rule>
   </filter>
   <load_balancer>
@@ -427,9 +491,9 @@
     <column_count>2</column_count>
   </widgets>
   <revision>
-    <username>root@192.168.1.2</username>
-    <time>1611688207.893</time>
-    <description>/system_advanced_admin.php made changes</description>
+    <username>root@74.80.23.113</username>
+    <time>1611693211.3988</time>
+    <description>/system_general.php made changes</description>
   </revision>
   <OPNsense>
     <captiveportal version="1.0.0">
@@ -812,5 +876,7 @@
     <crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUdYVENDQkVXZ0F3SUJBZ0lVQ21MbWltakVqS0FNby84NFBkaUNLMzJhQ1VVd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1RqRUxNQWtHQTFVRUJoTUNUa3d4RlRBVEJnTlZCQWdNREZwMWFXUXRTRzlzYkdGdVpERVZNQk1HQTFVRQpCd3dNVFdsa1pHVnNhR0Z5Ym1sek1SRXdEd1lEVlFRS0RBaFBVRTV6Wlc1elpUQWVGdzB5TVRBeE1qWXhPREl3Ck1qaGFGdzB5TXpBMU1ERXhPREl3TWpoYU1FNHhDekFKQmdOVkJBWVRBazVNTVJVd0V3WURWUVFJREF4YWRXbGsKTFVodmJHeGhibVF4RlRBVEJnTlZCQWNNREUxcFpHUmxiR2hoY201cGN6RVJNQThHQTFVRUNnd0lUMUJPYzJWdQpjMlV3Z2dJaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQ0R3QXdnZ0lLQW9JQ0FRQzVyQS9yQU8xcTVvVStvKzVaCitsMGx2eWp1VnBVUzNNNTh2aXN5ZnVCZytIL0JuZm0wTWQ5cy95WGdnK3VlY2FPSWhjdDVlbTloQTBNaytTWHYKT0UzTS85RzlsZHVBamRMSGVtVy9XY0ozT1VqL3pGdVE5aWVuQndUMlVrYUpCVHJac1h4eWpEa3pCOTB3TVllRgpyNVpwUGcxNVpuOEZ5NE83UlpBdXZxNkljNytuMkpPWWRENHFUVFFnb0Y0RGc1T1kwYXhBb1R5S0VMMXVHV21DCnlNZ0JMbmVFeHJHV1ZDeXQxQ2JTNzFkTFBLVktMbWdrMDRNQUtXOEcwV2hlN1c1cEZjTDRVc0NVQ2hrR3RVaGQKRjF4K3NkZy9rbmFoMlhzeXhONUVUbnFOVm9TNEtESkhLc2t3aDhpd2Y0Y1lsQkloclkvcituSmprNzNzU0g3Mwo3ZnpDZ2hJNUVWa2NnUzhvY3V0UDY1Zm1IQ0tBQ1BRenc4dW04NFhlTU5NK3R0THdoK3poNis4WXhsaUZvZ2IxCmlOeDR6dkZaSFgzTGhmWkx4Z1ZqMkJyWHN2VlZvVHZ2UTZ5aDAwUTdlMjlTZkxOOHIwcnU2UEdpdnFVM0xJdHIKWmg1OWZSOXhMM0R5YTFQcXdGYlNBakRTakhpelE5MXpDQzN3eSttSjNsNnVnWVBuaFR2U2NwZ2t4MjIyVGlEeQpSNHlHUnpjL0ZNYnprK0VvNU9WVmhkSS9mckdySTVycGFBTTJvbDh4emp1ZUlwZHFtbjhVVVl1Y1hkYlY2Y3p0CjhCTXpldWZNcklwUEFRSWJiYW9Ddit0dHBMNXNhcTlZZ2txb3hVcTVicHk3eWcxL3FnUVhFUWtKZVduOWNGaWYKY3JYWGphbkVxcG5LRlF4RTdPQjJ3dkV6bFFJREFRQUJvNElCTVRDQ0FTMHdDUVlEVlIwVEJBSXdBREFSQmdsZwpoa2dCaHZoQ0FRRUVCQU1DQmtBd05BWUpZSVpJQVliNFFnRU5CQ2NXSlU5UVRuTmxibk5sSUVkbGJtVnlZWFJsClpDQlRaWEoyWlhJZ1EyVnlkR2xtYVdOaGRHVXdIUVlEVlIwT0JCWUVGRUJ6Z1pQaUF4M0lmKzM2TExMc1pQbS8KN0RaZk1JR0xCZ05WSFNNRWdZTXdnWUNBRkVCemdaUGlBeDNJZiszNkxMTHNaUG0vN0RaZm9WS2tVREJPTVFzdwpDUVlEVlFRR0V3Sk9UREVWTUJNR0ExVUVDQXdNV25WcFpDMUliMnhzWVc1a01SVXdFd1lEVlFRSERBeE5hV1JrClpXeG9ZWEp1YVhNeEVUQVBCZ05WQkFvTUNFOVFUbk5sYm5ObGdoUUtZdWFLYU1TTW9BeWovemc5MklJcmZab0oKUlRBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSUFnSXdDd1lEVlIwUEJBUURBZ1dnTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQUI0dEJQbExDNUlxVnBRSVF1dk9FVFRCTjltVXJxekhWa2NBT241ZkFxCnVKYk9MSDJkQXB2cDFBaFc0aE9ORi9oWEtqcVJ6Q1l4L3lqOGFyVjIxeDc2T0twMFZGMlljQ1RqZS8yV1c5bU8KMFgyTVQ3blJnVU5iTFFWbDYyNGVud2NZSGgyNC92S01GNXhqQUI5b3BNdzM5UlN3Q2RoeEtqTXJxZXVON2NSRwpEY0lFR1BkbWxXRy8zTlBod2cvcFlRa25HOWpBazNkbWUrMXRDRUdyNWt1MTVKZkk5U1JRRCt1bytFdFFGRWdwCk0weUVkekpaM3IzSnVldENOSTBuZmhFOTczckJ0L09DeE96TUJtOTk4YWt1dFhOM3NaMHNmdG9ST1lneFVaTUcKUlR6WEtiSHF0UDZ3enRObUFzWEFpYjJXT1JabEJianAxenUwQWNKWDFQRVZFMFc0TXVJSW0rQlNlUjN0MzRlQQpqRlFmZHp4S09ZWWR1WURBOW5Xa0Y0WlJudTFUMWowWkxzYWtPSVBERnJzZjRmUmRBcW11VGttNm1DRGpNRW1ECmkwWVgrdXNTbFVXeEVZOHI4WXZreWErZDdDVjIyR2ZoZW1INU9LV3VXeHZLZlZZVG1UUDZYc3FLa2xQcndsUlUKZVAwK2JZTm5qM1VVc1F2MXdicGZQVWFKTUdWekZjaDFTV2ZOZmFpZ3Y2bGQ4dWtkWVJlL0svNHVMNHhTQ0w0VgpMRXlId25BVGpPVUtrK21GY00zYjNZcnVXUnVqWEZRZDZXdnEvQ25teDVBbjRVMVBwL3BMMFVzRXpteUI0V1VOCm1scTl5MkY0ZWF0NWNYM0NLL1haejJhSU1IN21tNnFpSlZWS0l3Zitmb1daS3A1a2cvUDBiYXU5cVpLMnYrMGgKR3c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</crt>
     <prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUpRd0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQ1Mwd2dna3BBZ0VBQW9JQ0FRQzVyQS9yQU8xcTVvVSsKbys1WitsMGx2eWp1VnBVUzNNNTh2aXN5ZnVCZytIL0JuZm0wTWQ5cy95WGdnK3VlY2FPSWhjdDVlbTloQTBNaworU1h2T0UzTS85RzlsZHVBamRMSGVtVy9XY0ozT1VqL3pGdVE5aWVuQndUMlVrYUpCVHJac1h4eWpEa3pCOTB3Ck1ZZUZyNVpwUGcxNVpuOEZ5NE83UlpBdXZxNkljNytuMkpPWWRENHFUVFFnb0Y0RGc1T1kwYXhBb1R5S0VMMXUKR1dtQ3lNZ0JMbmVFeHJHV1ZDeXQxQ2JTNzFkTFBLVktMbWdrMDRNQUtXOEcwV2hlN1c1cEZjTDRVc0NVQ2hrRwp0VWhkRjF4K3NkZy9rbmFoMlhzeXhONUVUbnFOVm9TNEtESkhLc2t3aDhpd2Y0Y1lsQkloclkvcituSmprNzNzClNINzM3ZnpDZ2hJNUVWa2NnUzhvY3V0UDY1Zm1IQ0tBQ1BRenc4dW04NFhlTU5NK3R0THdoK3poNis4WXhsaUYKb2diMWlOeDR6dkZaSFgzTGhmWkx4Z1ZqMkJyWHN2VlZvVHZ2UTZ5aDAwUTdlMjlTZkxOOHIwcnU2UEdpdnFVMwpMSXRyWmg1OWZSOXhMM0R5YTFQcXdGYlNBakRTakhpelE5MXpDQzN3eSttSjNsNnVnWVBuaFR2U2NwZ2t4MjIyClRpRHlSNHlHUnpjL0ZNYnprK0VvNU9WVmhkSS9mckdySTVycGFBTTJvbDh4emp1ZUlwZHFtbjhVVVl1Y1hkYlYKNmN6dDhCTXpldWZNcklwUEFRSWJiYW9Ddit0dHBMNXNhcTlZZ2txb3hVcTVicHk3eWcxL3FnUVhFUWtKZVduOQpjRmlmY3JYWGphbkVxcG5LRlF4RTdPQjJ3dkV6bFFJREFRQUJBb0lDQUVKOVlISHFzaHEvRkdZN05FYmFobkxYCkF1UmU4eUYvR3g3R3h4ZGRJaUwzdW1CdW54WXRhZkpSYUpIL0MraUFqMng3WlVOS1dncG1yYXZXNFFQS3FPbkoKanFXU3ZibEtrSG5JMWhqeEh0ZXRGdndyaFhyaSs0NHYwRklaWXBMODRYZEZ2T2dVV1FOeVJINVdyazVzYzdPYQplaDdJV3FLTG44LzNlRXVWRTFGZ0Nma2tjSzUrcWloaDMxSHp1OWNNVGxYQ2VDbm8wNUlwcm54Mzh6WFhpdkFKCllObVdnYy93c3ROSkR1SW92WnoreWI1SDRobVYrT3FjNjlxSU1SVVZkNTJBSW9Ma3Qzd01KYXdtVFJTeElmbG8KM0tUZllVWlNhSERrMlNlaTV2WW9UbnpZUURFR0hHZ1pwLyswbTM5c3Z4VjZYdmpGaGlNc3JDMnFSSFdxcndHbgp2eHl5UFNOQndUdnBZMlk2RmFrdnZ6UC9sM3hZanh1QlppTzlQS2htaVJMTWt4NVJSMndHdjRQOFJPdUFzajZHCnE1NUNMQkFERGhOaFJjcTEyeXFhS3puRHpXRlZvKzYwbjJMUnRuc0tIV3dsUFQ5Sm5HQnNaKzN3R25nR2JjRlUKVEpjbjlyNmRBUld3V0xNM1ZDd3liMmN4ZUVUeFM1ZjNMQmErUmRqTjJZWXJ1MitzdDJLbmhMbmNkbGRWZ3dpawpWS24xb0hVY1I1eGk3RVlUNTFHTStmQkZLTVhDbTBYMWR5aDVRQldyT3V2Zm1rbkFNS2lXdk5kc1RXS2F5SlNOCmM1OHZRbCtzRXN0UnVHTVNjZGZtV1d1bWt0c25qNjAxVHBIOUZRWEszVHNjM0lJNzAzVGc2YUg1QjZwSmN2MXAKbUdpL1luay91SkRWNnk5RUkwejlBb0lCQVFEdzY0NWduTjNQTVdEYllUbFh0YUhjS0ZWTEZmQXJsSWkvbGRyTgpGNG8wb005STU2L1B0c2xsTGF1b08vK3dVSkpKazRDVEVweGhWRHFIbWo3THZIU1pSWUxuYU5MTDh0ZlBMNzliCnR0ZzFkZXhBUXNpYVVMMGxHNXZDSHNpWW5nTnh0Tmg0YmN1STA4dU8rSG1GTnBFVFZlQkhEVE1icnloUjhFeU0KMngwWE5qcENvb1RNeXYrVUhUZkZVeGZyWE4xdTNjd3p4cVQ3SjBXdDEwVjN0MDVibHNDSDdablFBTHN2Y0NDdgplN1l4cFhHOUtUbTRkdmJIYis0Z2RsT2xzNGlic2toNy96aENGZEMwb3J4U2NUNGI4M2N2YmxiVjlzWXYyTWE4CktvM1p0Yy9WWE13WHpzV1lJS0dBMmNIdTZmMUlpTHJiY0d3K3NxWXlrdWgyd1ZWYkFvSUJBUURGU3ptK3UydmcKbmlHSVYxWmlYTnZWZ3NWTXFONjZUd3lvUTYvaWV0eG9iOVV6QzFENXZocTJ2dVhZbERjdG1WWXl0RUtHY2RZRgovZFRvYURNaVozcTVNa3RtbmVhRU5tWCtqei9wSDI0Yi93RUNEbnMvMUhyL2lORm1LbkhjRVFLdGZRbDV6djZTClR1QWp6ajZvWUZPL2xaU1lXMG9ncHNlcE1ab2tRQXZ2OGRwY3FaQU56dndXMXlONDZMQmEzNG5ma1RKSFRZY1UKdzV3NFRWbllpQjEvTEo0UXlPNU5GOWhIYU4zSVYxcUppckdwamFUOXBlT3I2elQxaEk4a0JPWDEwY2NMekk4NApSOGl4bDZVVUNGWEdsVXBoSWNUYlFYbVNsQ2IrYTQ5RnI3OVhRbGxoSG11VXhiQ1lvNW1acjRhcUtUUmxkZWw2CnZ5VkxacW9BRzczUEFvSUJBR2hIblY0R0tDQTVvRkgwMkV3MXF6VFBKSFFXcjlrOU5wK3Vyb0ZkY2czcm1TMVcKVTR3VjgwQmZMMURuZjNvQ3RmOHc0Rk5JbC9XczdwU3BXQXI1cklKM1N2ejlLMWpwNlMyZDNqZEZnbnBKYTVRNQpFL2x2Zng5anZ0eWNWSGx5MDh6UTJXM3ZJRTArVjNxdjVIR2J0OW5scnVreU5uQUNOZktaajVqY2N0QU1RZFY3CjRQMS8xSFo0Mng0SEpIQlV4dWZwQ3kxU0N6Rkd3MnRHcGFQMjdPeko2Tll0S3dtVWQzRkdHRys4blpVSnBweVoKRG9uZ3ZGcUJBVko5eFNFUS84MWNzdkV3L0ZubWRXcnFrWmNodXgrQUY1T3BMOTczTEx1akdncHlaT25hUDNaNwo3ejlTMmNaS1FYMnpRN1UxQk5Qemt1WE8ySnVlMmo5RHhXazVyOGNDZ2dFQkFMa002K2FvS0hFUUlPZWU4NWxpCis1YnlCMWoxODZMUVRsRHMyK1lUMHZQcUlSQzFob2dZOVRsL0tGclIra2M4MFlyUlpLeHh6WXJsSUhPMGVISEcKbVdkbmN5Mlc0UVlWZCtraU41SFROeFh2UXVUSTdIVmNPTm5CWEpiMUxNSjYrZ1g3aDQzR3h5UTM4eWZpWlFiTgpBd0Jwcm15UkE2QklqbkYxNHR3cGJvanFVaVFqcnNnazRuSVI3R1dWNndQeE00S016NW50Yjh2Y0JZVVJtRG51CndhdnREMzB5MmNGWm9qU29lWTFWMGNlOFhSTnBsZDJMWVZaNVVMMFFUcW84SmUxQmkrN1hPV1pTZmoyRXZRTmoKSmdFVE9pYU00L1c3SGVxTUoxN3ZSL3pXOFNOSlNrZzduakIybEVNMi8vVVVtN3l5MVVCdExrZEJUaHZBK2FjTQpYaVVDZ2dFQkFKS1doTjJRUUxBY0RHajNCQmswQTFIZ3g3a01vaHJVaitFY0c3V1FzU1VpTStoMGs3d29BR1cvCnpxZTA5ZVA1eDZmdGhKNVVwbXMyNCttSzZUbXpubjl4eGlpTU5YV0ZNYWZlYUdjS3FTaXRmWG0ybU5CeTJZblcKKzI3SG4rUXBDZDVKM1hSK3VQaGtLcGxZZjVTSURrQ1pJbENSUk0xYnNjbGhCTGtGYjlzNjRoNE1ITXRRY2lpYQpRYjV3MHplRjdYUVptV2NDSllYUkwzSEw2L0hIbmhndWN0dUtpeUlwNml1SFdobDhYQldlUDlLOUp3eXJjbjVUCk9HU2R6UStXeS8xR3poTVMvNUVTYlMwRHR6elFUQVYrVGNhbWhhTlBJZFdRRjQ3ZWZtT25XMXlJd3FaZ3lmcXUKUGcza2gvT0F5Yi9PWE4wNlByMTllcWliSC8xbmRQOD0KLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=</prv>
   </cert>
-  <staticroutes/>
+  <staticroutes>
+    <route/>
+  </staticroutes>
 </opnsense>
