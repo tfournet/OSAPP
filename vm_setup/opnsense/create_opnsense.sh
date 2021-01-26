@@ -88,4 +88,6 @@ sleep 1m
 
 cmd="wget -O /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pwd="opnsense"
-$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pwd $OPNSense_VMName.log $cmd 
+log="$osapp_inst/log/expect_$OPNSense_VMName.log"
+echo "Next we will log into $OPNSense_VMName and run: $cmd"
+$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pwd $log $cmd 
