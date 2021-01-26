@@ -77,3 +77,15 @@ virsh start $OPNSense_VMName
 virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 
 rm -rf /tmp/opnsense
+
+dnf -y install httpd
+systemctl start httpd
+
+mkdir -p /var/www/html/opnsense
+cp -v $osapp_inst/vm_setup/opnsense/conf/config.xml /var/www/html/opnsense 
+
+sleep 1m 
+
+cmd="wget -O /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
+pwd="opnsense"
+$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pwd $OPNSense_VMName.log $cmd 

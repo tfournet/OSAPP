@@ -1,6 +1,6 @@
 #!/bin/bash
 
-which expect || dnf -y install expect 
+which expect >/dev/null || dnf -y install expect 
 
 usage() {
     echo "Usage: `basename $0` target password logfile <command>"
@@ -39,7 +39,7 @@ send "\n"
 send "\n"
 expect "login: " {
     send "root\n"
-    expect "Password: "
+    expect "Password:"
     send "$pass\n"
 } "~]# " {
     send "\n"
@@ -52,9 +52,6 @@ send "$cmd\n"
 
 send "echo end_exec_given_command > /dev/null\n"
 send "exit\n"
-send "\n"
-expect "Enter an option:"
-send "0\n"
 send "\n"
 expect "login: "
 send "\n"
