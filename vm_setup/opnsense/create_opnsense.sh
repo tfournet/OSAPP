@@ -81,6 +81,9 @@ rm -rf /tmp/opnsense
 dnf -y install httpd
 systemctl start httpd
 
+
+### Place configuration file ###
+
 mkdir -p /var/www/html/opnsense
 cp -v $osapp_inst/vm_setup/opnsense/conf/config.xml /var/www/html/opnsense 
 
@@ -90,6 +93,11 @@ sleep $sleeptime
 
 cmd="wget -O /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pwd="opnsense"
-log="$osapp_inst/log/expect_$OPNSense_VMName.log"
+logdir=log="$osapp_inst/log"
+mkdir -p $logdir
+log="$logdir/expect_$OPNSense_VMName.log"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
+echo "Logging to: $log"
+echo -e "\n\n"
+
 sudo $osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pwd $log $cmd 
