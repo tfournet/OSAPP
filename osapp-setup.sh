@@ -41,10 +41,10 @@ virt-manager &
 ### VMs ###
 
 # Import Firewall VM(s)
-sudo $osapp_inst/vm_setup/create_opnsense.sh
+sudo $osapp_inst/vm_setup/opnsense/create_opnsense.sh
 
 # Import Perch VM
-sudo $osapp_inst/vm_setup/create_perch.sh
+sudo $osapp_inst/vm_setup/perch/create_perch.sh
 
 
 

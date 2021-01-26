@@ -89,6 +89,21 @@ done
 nmcli connection down   $ifname
 nmcli connection up     $ifname 
 
-
+## Set IP for this host on VLAN 10 (temporary)
+echo -n "Setting Primary IP Address "
+vlan="10"
+ifname=br.$vlan
+ipaddr="192.168.1.2/24"
+gateway="192.168.1.1"
+locdns=$gateway
+echo "for $ifname to $ipaddr"
+#nmcli connection modify $ifname ifname $ifname dev $bondName id $vlan
+nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr ipv4.gateway $gateway
+nmcli connection modify $ifname ipv4.dns  $locdns
+for dns_server in ${Allowed_DNS[@]}; do
+    nmcli connection modify $ifname +ipv4.dns $dns_server
+done
+nmcli connection down   $ifname
+nmcli connection up     $ifname 
 echo -e "\n\n\n"
 nmcli connection show

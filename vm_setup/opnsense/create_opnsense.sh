@@ -50,9 +50,9 @@ virtInstallOpts="\
     --os-variant=freebsd12.0 \
     --console pty,target_type=serial \
     --disk /var/lib/libvirt/pool0/$OPNSense_VMName.qcow \
-    --network=bridge=$defaultBridge,model=virtio \
     -v \
     "
+#    --network=bridge=$defaultBridge,model=virtio \
 
 for vlan in ${VLAN_IDs[@]}; do
   virtInstallOpts="\
