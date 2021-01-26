@@ -49,9 +49,10 @@ send "8\n"
 send "\n"
 send "echo start_exec_given_command > /dev/null\n"
 send "$cmd\n"
-
 send -- "^]"
 interact
+send \"\"
+expect eof
 EOF
 
 #cat $expfile

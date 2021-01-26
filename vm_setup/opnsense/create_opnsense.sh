@@ -100,4 +100,4 @@ pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
-$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
+$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd &
