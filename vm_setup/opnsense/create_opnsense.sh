@@ -96,11 +96,8 @@ echo "Sleeping $sleeptime"
 sleep $sleeptime
 
 cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
-pwd="opnsense"
-logdir=log="/tmp"
-log="$logdir/expect_$OPNSense_VMName.log"
+pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
-echo "Logging to: $log"
 echo -e "\n\n"
 
-sudo $osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pwd $log $cmd 
+sudo $osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
