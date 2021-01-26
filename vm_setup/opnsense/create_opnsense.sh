@@ -91,14 +91,13 @@ systemctl start httpd
 mkdir -p /var/www/html/opnsense
 cp -v $osapp_inst/vm_setup/opnsense/conf/config.xml /var/www/html/opnsense 
 
-sleeptime="1m"
+sleeptime="2m"
 echo "Sleeping $sleeptime"
 sleep $sleeptime
 
 cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pwd="opnsense"
-logdir=log="$osapp_inst/log"
-mkdir -p $logdir
+logdir=log="/tmp"
 log="$logdir/expect_$OPNSense_VMName.log"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo "Logging to: $log"
