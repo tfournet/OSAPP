@@ -36,6 +36,7 @@ log_file -noappend $logfile
 spawn virsh console --force $target
 expect "Escape character is"
 send "\n"
+send "\n"
 expect "login: " {
     send "root\n"
     expect "Password: "
@@ -43,11 +44,17 @@ expect "login: " {
 } "~]# " {
     send "\n"
 }
+expect "Enter an option:"
+send "8\n"
+send "\n"
 send "echo start_exec_given_command > /dev/null\n"
 send "$cmd\n"
 
 send "echo end_exec_given_command > /dev/null\n"
 send "exit\n"
+send "\n"
+expect "Enter an option:"
+send "0\n"
 send "\n"
 expect "login: "
 send "\n"
