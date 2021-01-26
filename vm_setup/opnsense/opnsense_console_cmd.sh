@@ -50,12 +50,6 @@ send "\n"
 send "echo start_exec_given_command > /dev/null\n"
 send "$cmd\n"
 
-send "echo end_exec_given_command > /dev/null\n"
-send "exit\n"
-send "\n"
-expect "login: "
-send "\n"
-expect "login: "
 send -- "^]"
 interact
 EOF
