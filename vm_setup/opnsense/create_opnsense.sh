@@ -74,7 +74,7 @@ virsh define $OPNSense_VMName.xml
 
 virsh start $OPNSense_VMName
 
-virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
+#virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 
 rm -rf /tmp/opnsense
 
@@ -91,7 +91,7 @@ systemctl start httpd
 mkdir -p /var/www/html/opnsense
 cp -v $osapp_inst/vm_setup/opnsense/conf/config.xml /var/www/html/opnsense 
 
-sleeptime="2m"
+sleeptime="3m"
 echo "Sleeping $sleeptime"
 sleep $sleeptime
 
@@ -100,4 +100,4 @@ pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
-sudo $osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
+$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
