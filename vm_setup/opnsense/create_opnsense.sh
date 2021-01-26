@@ -78,6 +78,10 @@ virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 
 rm -rf /tmp/opnsense
 
+firewall-cmd --zone=public --permanent --add-service=http
+firewall-cmd --zone=public --permanent --add-service=https
+firewall-cmd --reload
+
 dnf -y install httpd
 systemctl start httpd
 
@@ -91,7 +95,7 @@ sleeptime="1m"
 echo "Sleeping $sleeptime"
 sleep $sleeptime
 
-cmd="wget -O /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
+cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pwd="opnsense"
 logdir=log="$osapp_inst/log"
 mkdir -p $logdir
