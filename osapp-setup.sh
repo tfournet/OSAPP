@@ -1,9 +1,7 @@
 #!/bin/sh
 
 # Created by Tim Fournet - tfournet@radersolutions.com
-# Created 2020-11-25
-# Updated 2021-01-25
-myVersion=7
+
 
 mkdir -p /etc/osapp 
 conf=/etc/osapp/osapp-vars.conf 
@@ -11,18 +9,15 @@ cp  /usr/local/osapp/osapp-vars.conf $conf
 
 source $conf 
 
-echo "Beginning Secured Setup version $myVersion"
+echo "Beginning Setup"
 
+dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
 
 #testing mode############
 #alias sudo="echo sudo"
 #delete this to make stuff run for reals
 
-
-# Get Installation Specifics
-
-hostname=""
-cns_location_identifier=""
+sudo $osapp_inst/get_variables.sh 
 
 # Create SSH Keys
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
@@ -30,7 +25,7 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 # Add RMM Agent(s)
 
-sudo $osapp_inst/install-labtech.sh $cwa_LocID
+sudo $osapp_inst/install-labtech.sh 
 
 # Set up Hypervisor
 
