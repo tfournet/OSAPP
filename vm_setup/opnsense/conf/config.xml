@@ -212,9 +212,8 @@
     <primaryconsole>serial</primaryconsole>
     <secondaryconsole>video</secondaryconsole>
     <optimization>normal</optimization>
-    <hostname>OPNsense</hostname>
-    <domain>localdomain</domain>
-    <dnsallowoverride>1</dnsallowoverride>
+    <hostname>myhostname</hostname>
+    <domain>custdom.tld</domain>
     <group>
       <name>admins</name>
       <description>System Administrators</description>
@@ -241,16 +240,16 @@
       <port/>
       <ssl-ciphers/>
       <interfaces/>
-      <compression/>
+      <compression>5</compression>
+      <httpaccesslog>1</httpaccesslog>
     </webgui>
-    <disablenatreflection>yes</disablenatreflection>
     <usevirtualterminal>1</usevirtualterminal>
     <disableconsolemenu>1</disableconsolemenu>
     <disablevlanhwfilter>1</disablevlanhwfilter>
     <disablechecksumoffloading>1</disablechecksumoffloading>
     <disablesegmentationoffloading>1</disablesegmentationoffloading>
     <disablelargereceiveoffloading>1</disablelargereceiveoffloading>
-    <ipv6allow/>
+    <ipv6allow>1</ipv6allow>
     <powerd_ac_mode>hadp</powerd_ac_mode>
     <powerd_battery_mode>hadp</powerd_battery_mode>
     <powerd_normal_mode>hadp</powerd_normal_mode>
@@ -282,13 +281,21 @@
         <password_encryption/>
         <backupdir>OPNsense-Backup</backupdir>
       </nextcloud>
+      <git version="1.0.0">
+        <enabled>0</enabled>
+        <url/>
+        <branch>master</branch>
+        <privkey/>
+        <user/>
+        <password/>
+      </git>
     </backup>
     <firmware>
-      <plugins>os-theme-rebellion</plugins>
+      <plugins>os-theme-rebellion,os-acme-client,os-api-backup,os-firewall,os-sunnyvalley,os-wireguard,os-sensei,os-iperf,os-git-backup,os-haproxy,os-lldpd,os-frr</plugins>
     </firmware>
     <language>en_US</language>
-    <dnsallowoverride_exclude/>
-    <dnsserver/>
+    <dnsserver>208.67.220.220</dnsserver>
+    <dnsserver>208.67.222.222</dnsserver>
     <dns1gw>none</dns1gw>
     <dns2gw>none</dns2gw>
     <dns3gw>none</dns3gw>
@@ -297,32 +304,82 @@
     <dns6gw>none</dns6gw>
     <dns7gw>none</dns7gw>
     <dns8gw>none</dns8gw>
+    <dhcp6_debug>1</dhcp6_debug>
+    <enablebinatreflection>yes</enablebinatreflection>
+    <enablenatreflectionhelper>yes</enablenatreflectionhelper>
+    <rulesetoptimization>basic</rulesetoptimization>
+    <maximumstates/>
+    <maximumfrags/>
+    <aliasesresolveinterval/>
+    <maximumtableentries/>
+    <gw_switch_default>1</gw_switch_default>
   </system>
   <interfaces>
     <wan>
-      <enable>1</enable>
       <if>vtnet9</if>
-      <mtu/>
-      <ipaddr>dhcp</ipaddr>
-      <ipaddrv6>dhcp6</ipaddrv6>
-      <subnet/>
-      <gateway/>
+      <descr>WAN1</descr>
+      <enable>1</enable>
+      <spoofmac/>
       <blockpriv>1</blockpriv>
       <blockbogons>1</blockbogons>
+      <ipaddr>dhcp</ipaddr>
       <dhcphostname/>
-      <media/>
-      <mediaopt/>
+      <alias-address/>
+      <alias-subnet>32</alias-subnet>
+      <dhcprejectfrom/>
+      <adv_dhcp_pt_timeout/>
+      <adv_dhcp_pt_retry/>
+      <adv_dhcp_pt_select_timeout/>
+      <adv_dhcp_pt_reboot/>
+      <adv_dhcp_pt_backoff_cutoff/>
+      <adv_dhcp_pt_initial_interval/>
+      <adv_dhcp_pt_values>SavedCfg</adv_dhcp_pt_values>
+      <adv_dhcp_send_options/>
+      <adv_dhcp_request_options/>
+      <adv_dhcp_required_options/>
+      <adv_dhcp_option_modifiers/>
+      <adv_dhcp_config_advanced/>
+      <adv_dhcp_config_file_override/>
+      <adv_dhcp_config_file_override_path/>
+      <ipaddrv6>dhcp6</ipaddrv6>
       <dhcp6-ia-pd-len>0</dhcp6-ia-pd-len>
+      <adv_dhcp6_interface_statement_send_options/>
+      <adv_dhcp6_interface_statement_request_options/>
+      <adv_dhcp6_interface_statement_information_only_enable/>
+      <adv_dhcp6_interface_statement_script/>
+      <adv_dhcp6_id_assoc_statement_address_enable/>
+      <adv_dhcp6_id_assoc_statement_address/>
+      <adv_dhcp6_id_assoc_statement_address_id/>
+      <adv_dhcp6_id_assoc_statement_address_pltime/>
+      <adv_dhcp6_id_assoc_statement_address_vltime/>
+      <adv_dhcp6_id_assoc_statement_prefix_enable/>
+      <adv_dhcp6_id_assoc_statement_prefix/>
+      <adv_dhcp6_id_assoc_statement_prefix_id/>
+      <adv_dhcp6_id_assoc_statement_prefix_pltime/>
+      <adv_dhcp6_id_assoc_statement_prefix_vltime/>
+      <adv_dhcp6_prefix_interface_statement_sla_len/>
+      <adv_dhcp6_authentication_statement_authname/>
+      <adv_dhcp6_authentication_statement_protocol/>
+      <adv_dhcp6_authentication_statement_algorithm/>
+      <adv_dhcp6_authentication_statement_rdm/>
+      <adv_dhcp6_key_info_statement_keyname/>
+      <adv_dhcp6_key_info_statement_realm/>
+      <adv_dhcp6_key_info_statement_keyid/>
+      <adv_dhcp6_key_info_statement_secret/>
+      <adv_dhcp6_key_info_statement_expire/>
+      <adv_dhcp6_config_advanced/>
+      <adv_dhcp6_config_file_override/>
+      <adv_dhcp6_config_file_override_path/>
     </wan>
     <lan>
-      <enable>1</enable>
       <if>vtnet0</if>
-      <ipaddr>192.168.1.1</ipaddr>
+      <descr>VLAN10_Networking</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.10.1</ipaddr>
       <subnet>24</subnet>
       <ipaddrv6>track6</ipaddrv6>
-      <subnetv6>64</subnetv6>
-      <media/>
-      <mediaopt/>
       <track6-interface>wan</track6-interface>
       <track6-prefix-id>0</track6-prefix-id>
     </lan>
@@ -338,18 +395,277 @@
       <type>none</type>
       <virtual>1</virtual>
     </lo0>
+    <opt1>
+      <if>vtnet1</if>
+      <descr>VLAN20_Server</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.20.1</ipaddr>
+      <subnet>24</subnet>
+    </opt1>
+    <opt2>
+      <if>vtnet2</if>
+      <descr>VLAN30_Printers</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.30.2</ipaddr>
+      <subnet>24</subnet>
+    </opt2>
+    <opt3>
+      <if>vtnet3</if>
+      <descr>VLAN40_DMZ</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.40.1</ipaddr>
+      <subnet>24</subnet>
+    </opt3>
+    <opt4>
+      <if>vtnet4</if>
+      <descr>VLAN50_Desktops</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.50.1</ipaddr>
+      <subnet>23</subnet>
+    </opt4>
+    <opt5>
+      <if>vtnet5</if>
+      <descr>VLAN60_IoT</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.60.1</ipaddr>
+      <subnet>24</subnet>
+    </opt5>
+    <opt6>
+      <if>vtnet6</if>
+      <descr>VLAN70_Guest</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.70.1</ipaddr>
+      <subnet>24</subnet>
+    </opt6>
+    <opt7>
+      <if>vtnet7</if>
+      <descr>VLAN80_DVR</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.80.1</ipaddr>
+      <subnet>24</subnet>
+    </opt7>
+    <opt8>
+      <if>vtnet8</if>
+      <descr>VLAN100_VoIP</descr>
+      <enable>1</enable>
+      <lock>1</lock>
+      <spoofmac/>
+      <ipaddr>10.10.100.1</ipaddr>
+      <subnet>24</subnet>
+    </opt8>
+    <opt9>
+      <if>vtnet10</if>
+      <descr>WAN2</descr>
+      <enable>1</enable>
+      <spoofmac/>
+      <blockbogons>1</blockbogons>
+      <ipaddr>dhcp</ipaddr>
+      <dhcphostname/>
+      <alias-address/>
+      <alias-subnet>32</alias-subnet>
+      <dhcprejectfrom/>
+      <adv_dhcp_pt_timeout/>
+      <adv_dhcp_pt_retry/>
+      <adv_dhcp_pt_select_timeout/>
+      <adv_dhcp_pt_reboot/>
+      <adv_dhcp_pt_backoff_cutoff/>
+      <adv_dhcp_pt_initial_interval/>
+      <adv_dhcp_pt_values>SavedCfg</adv_dhcp_pt_values>
+      <adv_dhcp_send_options/>
+      <adv_dhcp_request_options/>
+      <adv_dhcp_required_options/>
+      <adv_dhcp_option_modifiers/>
+      <adv_dhcp_config_advanced/>
+      <adv_dhcp_config_file_override/>
+      <adv_dhcp_config_file_override_path/>
+    </opt9>
+    <WAN>
+      <internal_dynamic>1</internal_dynamic>
+      <enable>1</enable>
+      <if>WAN</if>
+      <descr>WAN</descr>
+      <virtual>1</virtual>
+      <type>group</type>
+    </WAN>
   </interfaces>
   <dhcpd>
     <lan>
-      <enable/>
+      <enable>1</enable>
+      <gateway>10.10.10.1</gateway>
+      <domain>net.sitename.custdom.tld</domain>
+      <denyunknown>1</denyunknown>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
       <range>
-        <from>192.168.1.100</from>
-        <to>192.168.1.199</to>
+        <from>10.10.10.2</from>
+        <to>10.10.10.254</to>
       </range>
+      <winsserver/>
+      <dnsserver>10.10.10.1</dnsserver>
+      <ntpserver/>
     </lan>
+    <opt1>
+      <enable>1</enable>
+      <gateway>10.10.20.1</gateway>
+      <domain>svr.sitename.custdom.tld</domain>
+      <denyunknown>1</denyunknown>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.20.254</from>
+        <to>10.10.20.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.20.1</dnsserver>
+      <ntpserver/>
+    </opt1>
+    <opt2>
+      <enable>1</enable>
+      <gateway>10.10.30.1</gateway>
+      <domain>ptr.sitename.custdom.tld</domain>
+      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <ddnsupdate>1</ddnsupdate>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.30.240</from>
+        <to>10.10.30.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.30.1</dnsserver>
+      <ntpserver/>
+    </opt2>
+    <opt4>
+      <enable>1</enable>
+      <defaultleasetime>604800</defaultleasetime>
+      <maxleasetime>691200</maxleasetime>
+      <gateway>10.10.50.1</gateway>
+      <domain>pc.sitename.custdom.tld</domain>
+      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <ddnsupdate>1</ddnsupdate>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.50.2</from>
+        <to>10.10.51.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.50.1</dnsserver>
+      <ntpserver/>
+    </opt4>
+    <opt5>
+      <enable>1</enable>
+      <gateway>10.10.60.1</gateway>
+      <domain>iot.sitename.custdom.tld</domain>
+      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.60.50</from>
+        <to>10.10.60.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.60.1</dnsserver>
+      <ntpserver/>
+    </opt5>
+    <opt6>
+      <enable>1</enable>
+      <gateway>10.10.70.1</gateway>
+      <domain>guest.sitename.custdom.tld</domain>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.70.2</from>
+        <to>10.10.70.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.70.1</dnsserver>
+      <ntpserver/>
+    </opt6>
+    <opt7>
+      <enable>1</enable>
+      <gateway>10.10.80.1</gateway>
+      <domain>dvr.sitename.custdom.tld</domain>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.80.20</from>
+        <to>10.10.80.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.80.1</dnsserver>
+      <ntpserver/>
+    </opt7>
+    <opt8>
+      <enable>1</enable>
+      <gateway>10.10.100.1</gateway>
+      <domain>voip.sitename.custdom.tld</domain>
+      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.100.20</from>
+        <to>10.10.100.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.100.1</dnsserver>
+      <ntpserver/>
+    </opt8>
+    <opt3>
+      <enable>1</enable>
+      <gateway>10.10.40.1</gateway>
+      <domain>dmz.sitename.custdom.com</domain>
+      <domainsearchlist>hosted.custdom.com</domainsearchlist>
+      <denyunknown>1</denyunknown>
+      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
+      <numberoptions>
+        <item/>
+      </numberoptions>
+      <range>
+        <from>10.10.40.200</from>
+        <to>10.10.40.254</to>
+      </range>
+      <winsserver/>
+      <dnsserver>10.10.40.1</dnsserver>
+      <ntpserver/>
+    </opt3>
   </dhcpd>
   <unbound>
     <enable>1</enable>
+    <custom_options/>
+    <dnssec>1</dnssec>
+    <forwarding>1</forwarding>
+    <regdhcp>1</regdhcp>
   </unbound>
   <snmpd>
     <syslocation/>
@@ -367,13 +683,13 @@
       <protocol>tcp</protocol>
       <interface>wan</interface>
       <ipprotocol>inet</ipprotocol>
-      <descr>Allow HTTPS Admin remotely</descr>
+      <descr>Allow HTTPS Admin Remotely</descr>
       <tag/>
       <tagged/>
       <poolopts/>
       <associated-rule-id>nat_60107bc9848bb5.33748748</associated-rule-id>
       <log>1</log>
-      <target>192.168.1.1</target>
+      <target>10.10.10.1</target>
       <local-port>443</local-port>
       <source>
         <any>1</any>
@@ -383,8 +699,8 @@
         <port>2443</port>
       </destination>
       <updated>
-        <username>root@192.168.1.2</username>
-        <time>1611693001.543</time>
+        <username>root@10.10.10.3</username>
+        <time>1611696590.5581</time>
         <description>/firewall_nat_edit.php made changes</description>
       </updated>
       <created>
@@ -397,6 +713,199 @@
   <filter>
     <rule>
       <type>pass</type>
+      <interface>opt1,opt4</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow Access to Printers</descr>
+      <direction>in</direction>
+      <category>Printing</category>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <network>opt2</network>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611697850.2692</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611697850.2692</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <type>pass</type>
+      <interface>opt1,opt4,opt6,opt8</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow HTTPS Traffic Out</descr>
+      <direction>in</direction>
+      <category>Web</category>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <protocol>tcp</protocol>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <any>1</any>
+        <port>443</port>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611697998.9647</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611697998.9647</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <type>pass</type>
+      <interface>opt1,opt4,opt6,opt8</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow HTTP Traffic Out</descr>
+      <direction>in</direction>
+      <category>Web</category>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <protocol>tcp</protocol>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <any>1</any>
+        <port>80</port>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611698018.6327</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611698018.6327</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <type>pass</type>
+      <interface>opt1,opt4,opt5,opt6,opt7,opt8</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow OpenDNS Comms</descr>
+      <direction>in</direction>
+      <category>OpenDNS</category>
+      <floating>yes</floating>
+      <quick>1</quick>
+      <protocol>tcp/udp</protocol>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <address>208.67.220.0/21</address>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611698106.0058</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611698106.0058</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <type>pass</type>
+      <interface>lan,opt1,opt2,opt4,opt7,opt8</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow access to Hosted Networks</descr>
+      <direction>in</direction>
+      <category>Hosting</category>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <address>Hosted_Networks</address>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611698271.4957</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611698271.4957</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <type>pass</type>
+      <interface>lan,opt1,opt2,opt4,opt7,opt8</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <descr>Allow access to Hosted Networks</descr>
+      <direction>in</direction>
+      <category>Hosting</category>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <source>
+        <address>Hosted_Networks</address>
+      </source>
+      <destination>
+        <any>1</any>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611698299.636</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611698299.636</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
+      <source>
+        <any>1</any>
+      </source>
+      <interface>wan</interface>
+      <protocol>tcp</protocol>
+      <ipprotocol>inet</ipprotocol>
+      <destination>
+        <address>10.10.10.1</address>
+        <port>443</port>
+      </destination>
+      <log>1</log>
+      <descr>Allow HTTPS Admin Remotely</descr>
+      <associated-rule-id>nat_60107bc9848bb5.33748748</associated-rule-id>
+      <created>
+        <username>root@192.168.1.2</username>
+        <time>1611693001.5429</time>
+        <description>/firewall_nat_edit.php made changes</description>
+      </created>
+      <statetype>keep state</statetype>
+    </rule>
+    <rule>
+      <type>pass</type>
       <ipprotocol>inet</ipprotocol>
       <descr>Default allow LAN to any rule</descr>
       <interface>lan</interface>
@@ -406,6 +915,7 @@
       <destination>
         <any/>
       </destination>
+      <disabled>1</disabled>
     </rule>
     <rule>
       <type>pass</type>
@@ -418,25 +928,30 @@
       <destination>
         <any/>
       </destination>
+      <disabled>1</disabled>
     </rule>
     <rule>
+      <type>pass</type>
+      <interface>opt1</interface>
+      <ipprotocol>inet</ipprotocol>
+      <statetype>keep state</statetype>
+      <direction>in</direction>
+      <quick>1</quick>
       <source>
         <any>1</any>
       </source>
-      <interface>wan</interface>
-      <protocol>tcp</protocol>
-      <ipprotocol>inet</ipprotocol>
       <destination>
-        <address>192.168.1.1</address>
-        <port>443</port>
+        <network>(self)</network>
       </destination>
-      <log>1</log>
-      <descr>Allow HTTPS Admin remotely</descr>
-      <associated-rule-id>nat_60107bc9848bb5.33748748</associated-rule-id>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611702606.5801</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
       <created>
-        <username>root@192.168.1.2</username>
-        <time>1611693001.5429</time>
-        <description>/firewall_nat_edit.php made changes</description>
+        <username>root@74.80.23.113</username>
+        <time>1611702606.5801</time>
+        <description>/firewall_rules_edit.php made changes</description>
       </created>
     </rule>
   </filter>
@@ -485,71 +1000,58 @@
   </load_balancer>
   <ntpd>
     <prefer>0.opnsense.pool.ntp.org</prefer>
+    <logpeer>on</logpeer>
+    <logsys>on</logsys>
+    <interface>lan,opt1,opt2,opt3,opt4,opt5,opt6,opt7,opt8</interface>
   </ntpd>
   <widgets>
-    <sequence>system_information-container:00000000-col3:show,services_status-container:00000001-col4:show,gateways-container:00000002-col4:show,interface_list-container:00000003-col4:show</sequence>
+    <sequence>system_information-container:00000000-col3:show,traffic_graphs-container:00000001-col3:show,services_status-container:00000002-col4:show,gateways-container:00000003-col4:show,interface_list-container:00000004-col4:show,interface_statistics-container:00000005-col4:show,log-container:00000006-col4:show,openvpn-container:00000007-col4:show</sequence>
     <column_count>2</column_count>
   </widgets>
   <revision>
     <username>root@74.80.23.113</username>
-    <time>1611693211.3988</time>
-    <description>/system_general.php made changes</description>
+    <time>1611703044.9881</time>
+    <description>/api/lldpd/general/set made changes</description>
   </revision>
   <OPNsense>
     <captiveportal version="1.0.0">
       <zones/>
       <templates/>
     </captiveportal>
-    <cron version="1.0.1">
-      <jobs/>
-    </cron>
-    <Netflow version="1.0.1">
-      <capture>
-        <interfaces/>
-        <egress_only/>
-        <version>v9</version>
-        <targets/>
-      </capture>
-      <collect>
-        <enable>0</enable>
-      </collect>
-      <activeTimeout>1800</activeTimeout>
-      <inactiveTimeout>15</inactiveTimeout>
-    </Netflow>
     <Firewall>
+      <Filter version="1.0.0">
+        <rules/>
+        <snatrules/>
+      </Filter>
       <Alias version="1.0.0">
         <geoip>
           <url/>
         </geoip>
-        <aliases/>
+        <aliases>
+          <alias uuid="36f392f5-ed27-41d5-ada9-9a20cce9cccb">
+            <enabled>1</enabled>
+            <name>Perch_Sensor</name>
+            <type>host</type>
+            <proto/>
+            <counters>1</counters>
+            <updatefreq/>
+            <content>10.10.20.3</content>
+            <description>Perch Sensor's IP</description>
+          </alias>
+          <alias uuid="b8cb7980-8c61-40c9-a1c5-a6477402390d">
+            <enabled>1</enabled>
+            <name>Hosted_Networks</name>
+            <type>network</type>
+            <proto/>
+            <counters>0</counters>
+            <updatefreq/>
+            <content>10.250.0.0/16
+10.244.0.0/16</content>
+            <description>Hosted (Over VPN) LANs</description>
+          </alias>
+        </aliases>
       </Alias>
     </Firewall>
-    <IDS version="1.0.5">
-      <rules/>
-      <userDefinedRules/>
-      <files/>
-      <fileTags/>
-      <general>
-        <enabled>0</enabled>
-        <ips>0</ips>
-        <promisc>0</promisc>
-        <interfaces>wan</interfaces>
-        <homenet>192.168.0.0/16,10.0.0.0/8,172.16.0.0/12</homenet>
-        <defaultPacketSize/>
-        <UpdateCron/>
-        <AlertLogrotate>W0D23</AlertLogrotate>
-        <AlertSaveLogs>4</AlertSaveLogs>
-        <MPMAlgo>ac</MPMAlgo>
-        <detect>
-          <Profile>medium</Profile>
-          <toclient_groups/>
-          <toserver_groups/>
-        </detect>
-        <syslog>0</syslog>
-        <syslog_eve>0</syslog_eve>
-        <LogPayload>0</LogPayload>
-      </general>
-    </IDS>
     <Interfaces>
       <vxlans/>
       <loopbacks/>
@@ -729,7 +1231,58 @@
     <OpenVPNExport version="0.0.1">
       <servers/>
     </OpenVPNExport>
-    <proxy version="1.0.3">
+    <TrafficShaper version="1.0.3">
+      <pipes/>
+      <queues/>
+      <rules/>
+    </TrafficShaper>
+    <unboundplus>
+      <miscellaneous version="0.0.2">
+        <privatedomain/>
+        <dotservers/>
+      </miscellaneous>
+      <dnsbl version="0.0.1">
+        <service_enabled/>
+        <enabled>0</enabled>
+        <type/>
+        <lists/>
+        <whitelists/>
+      </dnsbl>
+    </unboundplus>
+    <IDS version="1.0.6">
+      <rules/>
+      <policies/>
+      <userDefinedRules/>
+      <files/>
+      <fileTags/>
+      <general>
+        <enabled>0</enabled>
+        <ips>0</ips>
+        <promisc>0</promisc>
+        <interfaces>wan</interfaces>
+        <homenet>192.168.0.0/16,10.0.0.0/8,172.16.0.0/12</homenet>
+        <defaultPacketSize/>
+        <UpdateCron/>
+        <AlertLogrotate>W0D23</AlertLogrotate>
+        <AlertSaveLogs>4</AlertSaveLogs>
+        <MPMAlgo>ac</MPMAlgo>
+        <detect>
+          <Profile>medium</Profile>
+          <toclient_groups/>
+          <toserver_groups/>
+        </detect>
+        <syslog>0</syslog>
+        <syslog_eve>0</syslog_eve>
+        <LogPayload>0</LogPayload>
+      </general>
+    </IDS>
+    <IPsec version="1.0.0">
+      <general>
+        <enabled/>
+      </general>
+      <keyPairs/>
+    </IPsec>
+    <proxy version="1.0.4">
       <general>
         <enabled>0</enabled>
         <error_pages>opnsense</error_pages>
@@ -746,6 +1299,7 @@
         <dnsV4First>0</dnsV4First>
         <forwardedForHandling>on</forwardedForHandling>
         <uriWhitespaceHandling>strip</uriWhitespaceHandling>
+        <enablePinger>1</enablePinger>
         <useViaHeader>1</useViaHeader>
         <suppressVersion>0</suppressVersion>
         <connecttimeout/>
@@ -808,6 +1362,8 @@
           <blackList/>
           <browser/>
           <mimeType/>
+          <googleapps/>
+          <youtube/>
           <safePorts>80:http,21:ftp,443:https,70:gopher,210:wais,1025-65535:unregistered ports,280:http-mgmt,488:gss-http,591:filemaker,777:multiling http</safePorts>
           <sslPorts>443:https</sslPorts>
           <remoteACLs>
@@ -841,34 +1397,436 @@
         <template/>
       </error_pages>
     </proxy>
+    <AcmeClient version="2.0.0">
+      <settings>
+        <enabled>0</enabled>
+        <autoRenewal>1</autoRenewal>
+        <UpdateCron/>
+        <environment>prod</environment>
+        <challengePort>43580</challengePort>
+        <restartTimeout>600</restartTimeout>
+        <haproxyIntegration>0</haproxyIntegration>
+        <haproxyAclRef/>
+        <haproxyActionRef/>
+        <haproxyServerRef/>
+        <haproxyBackendRef/>
+        <logLevel>normal</logLevel>
+      </settings>
+      <accounts/>
+      <certificates/>
+      <validations/>
+      <actions/>
+    </AcmeClient>
+    <wireguard>
+      <general version="0.0.1">
+        <enabled>0</enabled>
+      </general>
+      <server version="0.0.2">
+        <servers/>
+      </server>
+      <client version="0.0.5">
+        <clients/>
+      </client>
+    </wireguard>
+    <Sensei version="0.0.0">
+      <general>
+        <installTimestamp>1611695743</installTimestamp>
+        <heartbeatTimer>49 * * * *</heartbeatTimer>
+        <coreFileEnable>false</coreFileEnable>
+        <flavor>small</flavor>
+        <healthCheck>true</healthCheck>
+        <healthShare>true</healthShare>
+        <healthTimer>0,10,20,30,40,50 * * * *</healthTimer>
+        <heartbeatMonit>true</heartbeatMonit>
+        <hwbypass>false</hwbypass>
+        <SenseiTempSize>0</SenseiTempSize>
+        <CloudManagementEnable>false</CloudManagementEnable>
+        <CloudManagementAdmin/>
+        <CloudManagementUUID/>
+        <license>
+          <plan/>
+          <key/>
+          <startDate/>
+          <endDate/>
+          <Size>0</Size>
+        </license>
+        <support>
+          <key/>
+          <plan/>
+          <startDate/>
+          <endDate/>
+        </support>
+        <clientemail/>
+        <sendcategory>true</sendcategory>
+        <database>
+          <Type>ES</Type>
+          <Host>http://127.0.0.1</Host>
+          <Port>9200</Port>
+          <User/>
+          <Pass/>
+          <Version>56800</Version>
+          <Remote>false</Remote>
+          <Prefix/>
+          <ClusterUUID/>
+        </database>
+        <swapRate>30</swapRate>
+        <backupPath>/usr/local/datastore/backup</backupPath>
+      </general>
+      <shun>
+        <networks/>
+        <vlans/>
+      </shun>
+      <bypass>
+        <enable>false</enable>
+        <mode>false</mode>
+      </bypass>
+      <haconfig>
+        <enable>false</enable>
+        <configUpdateTime/>
+        <policyUpdateTime/>
+      </haconfig>
+      <netflow>
+        <enabled>false</enabled>
+        <version>9</version>
+        <collectorip>127.0.0.1</collectorip>
+        <collectorport>9996</collectorport>
+      </netflow>
+      <updater>
+        <enabled>true</enabled>
+        <autocheck>true</autocheck>
+        <lastupdate/>
+      </updater>
+      <anonymize>
+        <localAddress>false</localAddress>
+        <remoteAddress>false</remoteAddress>
+      </anonymize>
+      <onboot>
+        <eastpect>YES</eastpect>
+        <elasticsearch>NO</elasticsearch>
+        <mongod>NO</mongod>
+        <senpai>YES</senpai>
+      </onboot>
+      <reports>
+        <refresh>60000</refresh>
+        <interval>3600000</interval>
+        <custominterval>
+          <start/>
+          <end/>
+        </custominterval>
+        <sum>sessions</sum>
+        <size>10</size>
+        <showhostname>false</showhostname>
+        <showBlock>false</showBlock>
+        <showLocal>false</showLocal>
+        <generate>
+          <enabled>false</enabled>
+          <sum>volume</sum>
+          <timer>45 0 * * *</timer>
+          <pdf>false</pdf>
+          <mail>
+            <server>127.0.0.1</server>
+            <port>25</port>
+            <secured>NO</secured>
+            <username/>
+            <password/>
+            <from/>
+            <to/>
+            <nosslverify>false</nosslverify>
+          </mail>
+        </generate>
+      </reports>
+      <dnsEncrihmentConfig>
+        <servers/>
+        <reverse>false</reverse>
+        <aliases>true</aliases>
+      </dnsEncrihmentConfig>
+      <streamReportConfig>
+        <enabled>false</enabled>
+        <server/>
+        <port>514</port>
+        <protocol>UDP</protocol>
+        <indexes/>
+      </streamReportConfig>
+      <streamReportDataExternal>
+        <enabled>false</enabled>
+        <uri/>
+        <server/>
+        <port>9200</port>
+        <esVersion/>
+        <User/>
+        <Pass/>
+        <ClusterUUID/>
+      </streamReportDataExternal>
+      <dns>
+        <localDomain>intra.example.com</localDomain>
+      </dns>
+      <tls>
+        <enabled>false</enabled>
+        <certname/>
+        <passtopsites>false</passtopsites>
+      </tls>
+      <enrich>
+        <tcpServiceEnable>true</tcpServiceEnable>
+        <tcpServiceIP>127.0.0.1</tcpServiceIP>
+        <cloudWebcatEnrich>true</cloudWebcatEnrich>
+        <dns>false</dns>
+        <user>false</user>
+      </enrich>
+      <elasticsearch>
+        <retireAfter>7</retireAfter>
+      </elasticsearch>
+      <mongodb>
+        <retireAfter>2</retireAfter>
+      </mongodb>
+    </Sensei>
+    <cron version="1.0.2">
+      <jobs>
+        <job uuid="a05344a4-5462-40d3-bc03-ff8dc43a02e9">
+          <origin>Sensei</origin>
+          <enabled>1</enabled>
+          <minutes>*</minutes>
+          <hours>*</hours>
+          <days>*</days>
+          <months>*</months>
+          <weekdays>*</weekdays>
+          <who>root</who>
+          <command>sensei periodicals</command>
+          <parameters>&gt; /dev/null 2&gt;&amp;1</parameters>
+          <description>Sensei periodicals</description>
+        </job>
+        <job uuid="ae09a43f-c510-46de-844f-745110e712b0">
+          <origin>cron</origin>
+          <enabled>1</enabled>
+          <minutes>0</minutes>
+          <hours>2</hours>
+          <days>*</days>
+          <months>*</months>
+          <weekdays>6</weekdays>
+          <who>root</who>
+          <command>firmware auto-update</command>
+          <parameters/>
+          <description>Update Firmware</description>
+        </job>
+        <job uuid="fa0dd45b-2cc4-4ecd-b9d3-935a5506a2dd">
+          <origin>cron</origin>
+          <enabled>1</enabled>
+          <minutes>0</minutes>
+          <hours>1</hours>
+          <days>*</days>
+          <months>*</months>
+          <weekdays>*</weekdays>
+          <who>root</who>
+          <command>unbound dnsbl</command>
+          <parameters>DNSBLs</parameters>
+          <description>DNSBLs</description>
+        </job>
+        <job uuid="ecad5ef7-4ce1-468c-b242-0bd16a9c06fb">
+          <origin>cron</origin>
+          <enabled>1</enabled>
+          <minutes>0</minutes>
+          <hours>*</hours>
+          <days>*</days>
+          <months>*</months>
+          <weekdays>*</weekdays>
+          <who>root</who>
+          <command>filter refresh_aliases</command>
+          <parameters/>
+          <description>Firewall Aliases</description>
+        </job>
+      </jobs>
+    </cron>
+    <HAProxy version="2.10.0">
+      <general>
+        <enabled>0</enabled>
+        <gracefulStop>0</gracefulStop>
+        <seamlessReload>0</seamlessReload>
+        <showIntro>1</showIntro>
+        <peers>
+          <enabled>0</enabled>
+          <name1/>
+          <listen1/>
+          <port1>1024</port1>
+          <name2/>
+          <listen2/>
+          <port2>1024</port2>
+        </peers>
+        <tuning>
+          <root>0</root>
+          <maxConnections/>
+          <nbproc>1</nbproc>
+          <nbthread>1</nbthread>
+          <sslServerVerify>ignore</sslServerVerify>
+          <maxDHSize>1024</maxDHSize>
+          <bufferSize>16384</bufferSize>
+          <checkBufferSize>16384</checkBufferSize>
+          <spreadChecks>0</spreadChecks>
+          <luaMaxMem>0</luaMaxMem>
+          <customOptions/>
+          <ssl_defaultsEnabled>0</ssl_defaultsEnabled>
+          <ssl_bindOptions>no-sslv3,no-tlsv10,no-tls-tickets</ssl_bindOptions>
+          <ssl_minVersion/>
+          <ssl_maxVersion/>
+          <ssl_cipherList>ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256</ssl_cipherList>
+          <ssl_cipherSuites>TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256</ssl_cipherSuites>
+        </tuning>
+        <defaults>
+          <maxConnections/>
+          <timeoutClient>30s</timeoutClient>
+          <timeoutConnect>30s</timeoutConnect>
+          <timeoutCheck/>
+          <timeoutServer>30s</timeoutServer>
+          <retries>3</retries>
+          <redispatch>x-1</redispatch>
+          <init_addr>last,libc</init_addr>
+          <customOptions/>
+        </defaults>
+        <logging>
+          <host>127.0.0.1</host>
+          <facility>local0</facility>
+          <level>info</level>
+          <length/>
+        </logging>
+        <stats>
+          <enabled>0</enabled>
+          <port>8822</port>
+          <remoteEnabled>0</remoteEnabled>
+          <remoteBind/>
+          <authEnabled>0</authEnabled>
+          <users/>
+          <allowedUsers/>
+          <allowedGroups/>
+          <customOptions/>
+        </stats>
+        <cache>
+          <enabled>0</enabled>
+          <totalMaxSize>4</totalMaxSize>
+          <maxAge>60</maxAge>
+          <maxObjectSize/>
+        </cache>
+      </general>
+      <frontends/>
+      <backends/>
+      <servers/>
+      <healthchecks/>
+      <acls/>
+      <actions/>
+      <luas/>
+      <errorfiles/>
+      <mapfiles/>
+      <groups/>
+      <users/>
+      <cpus/>
+      <resolvers/>
+    </HAProxy>
+    <lldpd>
+      <general version="1.0.0">
+        <enabled>1</enabled>
+        <cdp>0</cdp>
+        <fdp>0</fdp>
+        <edp>0</edp>
+        <sonmp>0</sonmp>
+        <interface/>
+      </general>
+    </lldpd>
+    <Netflow version="1.0.1">
+      <capture>
+        <interfaces>lan,opt1,opt2,opt3,opt4,opt5,opt6,opt7,opt8,wan,opt9</interfaces>
+        <egress_only>wan,opt9</egress_only>
+        <version>v9</version>
+        <targets>127.0.0.1:2056,10.10.10.3:2055</targets>
+      </capture>
+      <collect>
+        <enable>1</enable>
+      </collect>
+      <activeTimeout>1800</activeTimeout>
+      <inactiveTimeout>15</inactiveTimeout>
+    </Netflow>
     <Syslog version="1.0.0">
       <general>
         <enabled>1</enabled>
       </general>
-      <destinations/>
+      <destinations>
+        <destination uuid="d27683ed-2039-4b63-b4bc-da72ed7f4f4b">
+          <enabled>1</enabled>
+          <transport>udp4</transport>
+          <program/>
+          <level>info,notice,warn,err,crit,alert,emerg</level>
+          <facility/>
+          <hostname>10.10.20.3</hostname>
+          <port>514</port>
+          <description>Log to Perch Sensor</description>
+        </destination>
+      </destinations>
     </Syslog>
-    <TrafficShaper version="1.0.3">
-      <pipes/>
-      <queues/>
-      <rules/>
-    </TrafficShaper>
-    <unboundplus>
-      <miscellaneous version="0.0.2">
-        <privatedomain/>
-        <dotservers/>
-      </miscellaneous>
-      <dnsbl version="0.0.1">
-        <service_enabled/>
+    <quagga>
+      <general version="1.0.2">
         <enabled>0</enabled>
-        <type/>
-        <lists/>
-        <whitelists/>
-      </dnsbl>
-    </unboundplus>
+        <profile>traditional</profile>
+        <enablecarp>0</enablecarp>
+        <enablesyslog>1</enablesyslog>
+        <sysloglevel>notifications</sysloglevel>
+      </general>
+      <ospf version="1.0.4">
+        <enabled>0</enabled>
+        <carp_demote>0</carp_demote>
+        <routerid/>
+        <costreference/>
+        <originate>0</originate>
+        <originatealways>0</originatealways>
+        <originatemetric/>
+        <passiveinterfaces/>
+        <redistribute/>
+        <redistributemap/>
+        <networks/>
+        <interfaces/>
+        <prefixlists/>
+        <routemaps/>
+      </ospf>
+    </quagga>
   </OPNsense>
   <ca/>
   <gateways>
-    <gateway_item/>
+    <gateway_item>
+      <interface>opt9</interface>
+      <gateway>dynamic</gateway>
+      <name>WAN2_DHCP</name>
+      <priority>255</priority>
+      <weight>1</weight>
+      <ipprotocol>inet</ipprotocol>
+      <interval/>
+      <descr/>
+    </gateway_item>
+    <gateway_item>
+      <interface>opt9</interface>
+      <gateway>dynamic</gateway>
+      <name>WAN2_DHCP6</name>
+      <priority>255</priority>
+      <weight>1</weight>
+      <ipprotocol>inet6</ipprotocol>
+      <interval/>
+      <descr/>
+      <disabled>1</disabled>
+    </gateway_item>
+    <gateway_item>
+      <interface>wan</interface>
+      <gateway>dynamic</gateway>
+      <name>WAN1_DHCP6</name>
+      <priority>254</priority>
+      <weight>1</weight>
+      <ipprotocol>inet6</ipprotocol>
+      <interval/>
+      <descr>Interface WAN1_DHCP6 Gateway</descr>
+    </gateway_item>
+    <gateway_item>
+      <interface>wan</interface>
+      <gateway>dynamic</gateway>
+      <name>WAN1_DHCP</name>
+      <priority>254</priority>
+      <weight>1</weight>
+      <ipprotocol>inet</ipprotocol>
+      <interval/>
+      <descr>Interface WAN1_DHCP Gateway</descr>
+    </gateway_item>
   </gateways>
   <cert>
     <refid>60105d6c08c7c</refid>
@@ -879,4 +1837,17 @@
   <staticroutes>
     <route/>
   </staticroutes>
+  <ppps>
+    <ppp/>
+  </ppps>
+  <ifgroups>
+    <ifgroupentry>
+      <members>wan opt9</members>
+      <descr/>
+      <ifname>WAN</ifname>
+    </ifgroupentry>
+  </ifgroups>
+  <virtualip>
+    <vip/>
+  </virtualip>
 </opnsense>

@@ -78,18 +78,9 @@ virsh start $OPNSense_VMName
 
 rm -rf /tmp/opnsense
 
-firewall-cmd --zone=public --permanent --add-service=http
-firewall-cmd --zone=public --permanent --add-service=https
-firewall-cmd --reload
 
-dnf -y install httpd
-systemctl start httpd
+$osapp/inst/vm_setup/opnsense/process_config.sh 
 
-
-### Place configuration file ###
-
-mkdir -p /var/www/html/opnsense
-cp -v $osapp_inst/vm_setup/opnsense/conf/config.xml /var/www/html/opnsense 
 
 sleeptime="3m"
 echo "Sleeping $sleeptime"
@@ -101,3 +92,6 @@ echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
 $osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd &
+
+systemctl stop httpd
+systemctl disable httpd

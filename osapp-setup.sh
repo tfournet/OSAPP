@@ -11,7 +11,7 @@ echo "Beginning Secured Setup version $myVersion"
 
 
 #testing mode############
-alias sudo="echo sudo"
+#alias sudo="echo sudo"
 #delete this to make stuff run for reals
 
 
@@ -44,7 +44,7 @@ virt-manager &
 sudo $osapp_inst/vm_setup/opnsense/create_opnsense.sh
 
 # Import Perch VM
-sudo $osapp_inst/vm_setup/perch/create_perch.sh
+echo sudo $osapp_inst/vm_setup/perch/create_perch.sh
 
 
 
@@ -52,7 +52,7 @@ sudo $osapp_inst/vm_setup/perch/create_perch.sh
 sudo $osapp_inst/container_setup/podman.sh
 
 # Create CyberCNS Container
-sudo $osapp_inst/container_setup/cybercns/cybercns.sh 
+echo sudo $osapp_inst/container_setup/cybercns/cybercns.sh 
 
 
 echo "End Secured Setup."

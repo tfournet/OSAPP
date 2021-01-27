@@ -13,13 +13,15 @@ MONITOR_PORT="br-bond0"
 #tc qdisc add dev $MONITOR_PORT handle 1: root prio
 #tc filter add dev $MONITOR_PORT parent 1: protocol all u32 match u8 0 0 action mirred egress mirror dev $MIRROR_PORT
 
+
 sif=$MONITOR_PORT
 dif=vxlan42
 sensor=10.$siteSubnet.20.3
 
 echo "Creating Monitor port $sif to mirror to sensor IP $sensor"
+ip link add vxlan42 type vxlan id 42 
 
-bridge fdb append to 00:00:00:00:00:00 dst "$sensor" dev vxlan0
+bridge fdb append to 00:00:00:00:00:00 dst "$sensor" dev $dif
 ip link set vxlan42 up
 # ingress
 tc qdisc add dev "$sif" ingress
