@@ -34,18 +34,11 @@ virt-v2v -i ova /tmp/perch/perch_sensor.ova -of qcow2 -os $vpool -on $Perch_VMNa
 
 
 
-sed -e "s/MONITOR_PORT=.*/MONITOR_PORT=\"br-$nicBondType"0"\"/g" $osapp_inst/vm_setup/perch/perch_monitor.sh > /usr/local/bin/perch_monitor.sh
-chmod a+x /usr/local/bin/perch_monitor.sh
-
-grep -q "perch_monitor.sh" /etc/rc.local || echo "/usr/local/bin/perch_monitor.sh" >> /etc/rc.local
-/usr/local/bin/perch_monitor.sh
-
 echo "Removing Existing Interfaces"
 virt-xml -d $Perch_VMName --remove-device --network all
 
 echo "Adding New Interfaces"
 virsh attach-interface --domain $Perch_VMName --type bridge --source br.20 --model virtio --config 
-#virsh attach-interface --domain $Perch_VMName --type bridge --source $monitorPort --model virtio --config 
 
 virsh domiflist --domain $Perch_VMName 
 
@@ -102,16 +95,21 @@ virt-customize -d $Perch_VMName --firstboot-command "$firstboot_cmds"
     
 # Start VM
 virsh start $Perch_VMName
+virsh autostart $Perch_VMName
 sleep 2
 
-virt-manager --connect qemu:///system --show-domain-console Perch_Sensor &
+#virt-manager --connect qemu:///system --show-domain-console Perch_Sensor &
 
 echo -n "Waiting for $Perch_VMName to boot.."
-for i in `seq 1 30`; do 
-  echo -n "."
-  sleep 1
-done
+sleep 10
 
+cp -f $osapp_inst/vm_setup/perch/perch_monitor.sh  /usr/local/bin/perch_monitor.sh
+chmod a+x /usr/local/bin/perch_monitor.sh
+
+grep -q "perch_monitor.sh" /etc/rc.local || echo "/usr/local/bin/perch_monitor.sh" >> /etc/rc.local
+chmod a+x /etc/rc.local 
+
+/usr/local/bin/perch_monitor.sh
 
 echo -e "\nLogging into Perch Sensor. Please complete the configuration wizard for the site."
 ssh -o 'StrictHostKeyChecking no' perch@10.$siteSubnet.20.3 

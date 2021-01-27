@@ -14,6 +14,7 @@ ping google.com -c1 && /usr/local/bin/install-labtech.sh {{cwa_LocID}}
 
 echo "Setting up VXLAN Traffic Collector"
 grep -q 'perch_vxlan.sh' /etc/rc.local || echo '/usr/local/bin/perch_vxlan.sh' >> /etc/rc.local 
+chmod a+x /usr/local/bin/perch_vxlan.sh 
 /usr/local/bin/perch_vxlan.sh 
 
 echo "SeLinux fixups for SSH Key-based authentication"

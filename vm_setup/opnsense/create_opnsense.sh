@@ -73,6 +73,8 @@ virt-install $virtInstallOpts | virt-xml $wan0 | virt-xml $wan1 > $OPNSense_VMNa
 virsh define $OPNSense_VMName.xml 
 
 virsh start $OPNSense_VMName
+virsh autostart $OPNSense_VMName
+
 
 #virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 

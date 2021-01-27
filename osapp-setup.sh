@@ -20,7 +20,9 @@ echo "Beginning Secured Setup version $myVersion"
 hostname=""
 cns_location_identifier=""
 
-#az group list
+# Create SSH Keys
+cat /dev/zero | ssh-keygen -t rsa -q -N ""
+
 
 # Add RMM Agent(s)
 

@@ -426,10 +426,39 @@
       <if>vtnet4</if>
       <descr>VLAN50_Desktops</descr>
       <enable>1</enable>
-      <lock>1</lock>
       <spoofmac/>
       <ipaddr>10.10.50.1</ipaddr>
       <subnet>23</subnet>
+      <ipaddrv6>dhcp6</ipaddrv6>
+      <dhcp6-ia-pd-len>0</dhcp6-ia-pd-len>
+      <dhcp6vlanprio>5</dhcp6vlanprio>
+      <adv_dhcp6_interface_statement_send_options/>
+      <adv_dhcp6_interface_statement_request_options/>
+      <adv_dhcp6_interface_statement_information_only_enable/>
+      <adv_dhcp6_interface_statement_script/>
+      <adv_dhcp6_id_assoc_statement_address_enable/>
+      <adv_dhcp6_id_assoc_statement_address/>
+      <adv_dhcp6_id_assoc_statement_address_id/>
+      <adv_dhcp6_id_assoc_statement_address_pltime/>
+      <adv_dhcp6_id_assoc_statement_address_vltime/>
+      <adv_dhcp6_id_assoc_statement_prefix_enable/>
+      <adv_dhcp6_id_assoc_statement_prefix/>
+      <adv_dhcp6_id_assoc_statement_prefix_id/>
+      <adv_dhcp6_id_assoc_statement_prefix_pltime/>
+      <adv_dhcp6_id_assoc_statement_prefix_vltime/>
+      <adv_dhcp6_prefix_interface_statement_sla_len/>
+      <adv_dhcp6_authentication_statement_authname/>
+      <adv_dhcp6_authentication_statement_protocol/>
+      <adv_dhcp6_authentication_statement_algorithm/>
+      <adv_dhcp6_authentication_statement_rdm/>
+      <adv_dhcp6_key_info_statement_keyname/>
+      <adv_dhcp6_key_info_statement_realm/>
+      <adv_dhcp6_key_info_statement_keyid/>
+      <adv_dhcp6_key_info_statement_secret/>
+      <adv_dhcp6_key_info_statement_expire/>
+      <adv_dhcp6_config_advanced/>
+      <adv_dhcp6_config_file_override/>
+      <adv_dhcp6_config_file_override_path/>
     </opt4>
     <opt5>
       <if>vtnet5</if>
@@ -524,13 +553,12 @@
       <enable>1</enable>
       <gateway>10.10.20.1</gateway>
       <domain>svr.sitename.custdom.tld</domain>
-      <denyunknown>1</denyunknown>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
       </numberoptions>
       <range>
-        <from>10.10.20.254</from>
+        <from>10.10.20.250</from>
         <to>10.10.20.254</to>
       </range>
       <winsserver/>
@@ -884,6 +912,32 @@
       </created>
     </rule>
     <rule>
+      <type>pass</type>
+      <interface>lan,opt1,opt2,opt3,opt4,opt5,opt6,opt7,opt8</interface>
+      <ipprotocol>inet46</ipprotocol>
+      <statetype>keep state</statetype>
+      <direction>in</direction>
+      <floating>yes</floating>
+      <log>1</log>
+      <quick>1</quick>
+      <source>
+        <any>1</any>
+      </source>
+      <destination>
+        <network>(self)</network>
+      </destination>
+      <updated>
+        <username>root@74.80.23.113</username>
+        <time>1611704142.1815</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </updated>
+      <created>
+        <username>root@74.80.23.113</username>
+        <time>1611704034.7302</time>
+        <description>/firewall_rules_edit.php made changes</description>
+      </created>
+    </rule>
+    <rule>
       <source>
         <any>1</any>
       </source>
@@ -1010,8 +1064,8 @@
   </widgets>
   <revision>
     <username>root@74.80.23.113</username>
-    <time>1611703044.9881</time>
-    <description>/api/lldpd/general/set made changes</description>
+    <time>1611708888.1632</time>
+    <description>/api/interfaces/vxlan_settings/setItem/0a79e08d-d861-4fc1-863d-a4d1e2ee8871 made changes</description>
   </revision>
   <OPNsense>
     <captiveportal version="1.0.0">
@@ -1053,8 +1107,17 @@
       </Alias>
     </Firewall>
     <Interfaces>
-      <vxlans/>
       <loopbacks/>
+      <vxlans version="0.0.0">
+        <vxlan uuid="0a79e08d-d861-4fc1-863d-a4d1e2ee8871">
+          <deviceId>0</deviceId>
+          <vxlanid>42</vxlanid>
+          <vxlanlocal>10.10.20.1</vxlanlocal>
+          <vxlanremote>10.10.20.3</vxlanremote>
+          <vxlangroup/>
+          <vxlandev/>
+        </vxlan>
+      </vxlans>
     </Interfaces>
     <monit version="1.0.8">
       <general>

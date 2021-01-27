@@ -1,0 +1,41 @@
+network_config:
+  - type: ovs_bridge
+    name: br-vlans
+    members:
+      - type: ovs_bond
+        name: br-bond0
+        members:
+          - type: interface
+            name: eno1
+          - type: interface
+            name: eno2
+          - type: vlan
+            vlan_id: 10
+            addresses: 
+              - ip_netmask: 192.168.1.2/24
+          - type: vlan
+            vlan_id: 20
+            addresses:
+              - ip_netmask: 10.10.{{siteSubnet}}.2/24 
+          - type: vlan
+            vlan_id: 30
+          - type: vlan
+            vlan_id: 40
+          - type: vlan
+            vlan_id: 50
+          - type: vlan
+            vlan_id: 60
+          - type: vlan
+            vlan_id: 70
+          - type: vlan
+            vlan_id: 80
+          - type: vlan
+            vlan_id: 100
+  - type: interface
+    name: eno3
+  - type: interface
+    name: eno4   
+ routes: 
+  - ip_netmask: 0.0.0.0/0
+    next_hop: 10.10.{{siteSubnet}}.1 
+    default: true 
