@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /usr/local/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf
 
 monitorPort="perchmon"
 

@@ -5,7 +5,11 @@
 # Updated 2021-01-25
 myVersion=7
 
-source /usr/local/osapp/osapp-vars.conf
+mkdir -p /etc/osapp 
+conf=/etc/osapp/osapp-vars.conf 
+cp  /usr/local/osapp/osapp-vars.conf $conf 
+
+source $conf 
 
 echo "Beginning Secured Setup version $myVersion"
 

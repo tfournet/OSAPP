@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /usr/local/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf
 
 
 firewall-cmd --zone=public --permanent --add-service=http
@@ -15,4 +15,10 @@ mkdir -p /var/www/html/opnsense
 input_config="$osapp_inst/vm_setup/opnsense/conf/config.xml"
 output_config="/var/www/html/opnsense/config.xml"
 
-
+sed \
+    -e "s/myhostname/$OPNsense_Hostname/g" \
+    -e "s/sitename/$siteName/g" \
+    -e "s/custdom.tld/$custTLD/g" \
+    -e "s/\<rocommunity\>public\<\/rocommunity\>/\<rocommunity\>radermonitor\<\/rocommunity\>/g" \
+    -e "s/10.10./10.$siteSubnet./g" \
+    $input_config > $output_config 

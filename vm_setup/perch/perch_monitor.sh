@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /usr/local/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf
 
 while ( ! echo $dif | grep -q "vnet" ) ; do 
     dif=$(virsh domiflist Perch_Sensor | grep bridge | awk {'print $1'}) 

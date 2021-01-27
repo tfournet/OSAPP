@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /usr/local/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf
 
 $osapp_inst/vm_setup/perch/remove-perch.sh
 $osapp_inst/vm_setup/opnesense/remove-opnsense.sh

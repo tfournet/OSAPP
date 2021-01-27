@@ -1,14 +1,8 @@
 #!/bin/sh
 
-#!/bin/bash
 
-# Pass in your CyberCNS instance hostname (eg. mycompany.mycybercns.com) as the first argument
-# Pass in the client site identifier as the second argument
-# example: "./get-docker-container.sh mycompanhy.mycybercns.com 5f17172880000ffffffff"
+source /etc/osapp/osapp-vars.conf
 
-
-# silently quit if this a Perch Sensor is in pass-thru mode
-# we've had some cases where the traffic stops passing when the container boots
 (hostname | grep -qi "perch") && ifconfig bridge0 && echo "Exiting because Bridged Interface" && exit
 
 cybercns_hostname=$cybercns_hostname

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /usr/local/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf
 
 dnf -y module-install virt
 dnf -y install virt-install virt-viewer libguestfs-tools virt-v2v

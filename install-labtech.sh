@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-source /usr/local/osapp/osapp-vars.conf || cwa_LocID=$1
+source /etc/osapp/osapp-vars.conf || cwa_LocID=$1
 
 tmpdir="/tmp/cwa"
 
@@ -31,5 +31,9 @@ chmod a+x install.sh
 ./install.sh
 
 ps axf | grep ltechagent 
+
+rm -rf LTechAgent
+rm -f lt.zip 
+
 
 
