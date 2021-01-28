@@ -61,7 +61,7 @@ expect "\[y\/N\]:"
 send "Y\n"
 send "\n"
 send -- "^]"
-interact
+close
 EOF
 
 #cat $expfile
