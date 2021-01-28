@@ -5,7 +5,7 @@ source /etc/osapp/osapp-vars.conf
 
 
 dnf -y install httpd
-systemctl start httpd
+systemctl enable --now httpd
 
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
