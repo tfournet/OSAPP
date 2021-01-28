@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Stolen from https://gist.github.com/Naoya-Horiguchi/9425402
 
 which expect >/dev/null || dnf -y install expect 
@@ -8,6 +9,7 @@ usage() {
     exit 0
 }
 
+e
 while getopts c: OPT
 do
   case $OPT in
@@ -26,6 +28,7 @@ cmd="$@"
 #echo $cmd
 expfile="/tmp/test-expect-script-$$.exp"
 
+echo "command: $cmd"
 cat <<EOF > $expfile
 #!/usr/bin/expect
 
@@ -63,7 +66,7 @@ expect eof
 EOF
 
 #cat $expfile
-expect $expfile > /dev/null
+expect $expfile # > /dev/null
 gawk '
     BEGIN { window = 0 }
     /end_exec_given_command/ { window = 0 }
