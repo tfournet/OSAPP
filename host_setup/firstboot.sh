@@ -40,6 +40,6 @@ if [ -d osapp ]; then rm -rf osapp ; fi
 sudo git clone https://github.com/tfournet/osapp 
 
 echo "Beginning Setup"
-/usr/local/osapp/osapp-setup.sh && echo "End configuration script." && sudo rm -f /need-setup
+echo /usr/local/osapp/osapp-setup.sh && echo "End configuration script." && sudo rm -f /need-setup
 
 
