@@ -15,7 +15,7 @@ while [ ! -f $compconfig ]; do
     sleep 10
 done 
 
-cwa_LocID="zero"
+cwa_LocID=$(grep location_id /usr/local/ltechagent/agent_config | awk {'print $2'})
 while ! [ $cwa_LocID -eq $cwa_LocID 2>/dev/null ]; do 
     echo -n "ConnectWise Automate (LabTech) Site ID: "
     read cwa_LocID 
@@ -38,7 +38,7 @@ if [ -f $compconfig ]; then
     sed -ie "s/^siteSubnet=.*/siteSubnet=$siteSubnet/g" $conf
     siteSubdomain=$(cat $compconfig | jq '.location_edf."Site_Subdomain"' --raw-output)
     sed -ie "s/^siteName=.*/siteName=$siteSubdomain/g" $conf
-    custTLD=$(cat $compconfig | jq '.location_edf."Primary Top-Level Domain"' --raw-output)
+    custTLD=$(cat $compconfig | jq '.client_edf."Primary Top-Level Domain"' --raw-output)
     sed -ie "s/^custTLD=.*/custTLD=$custTLD/g" $conf
     echo "Site SubDomain $siteSubdomain.$custTLD"
     OSAPP_Hostname="$custAbbr-$siteSubdomain-OSAPP"
