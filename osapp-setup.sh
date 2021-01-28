@@ -11,6 +11,11 @@ source $conf
 
 echo "Beginning Setup"
 
+# Add RMM Agent(s)
+
+sudo $osapp_inst/install-labtech.sh 
+
+# Install cockpit addons
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
 
 #testing mode############
@@ -23,9 +28,7 @@ sudo $osapp_inst/get_variables.sh
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 
-# Add RMM Agent(s)
 
-sudo $osapp_inst/install-labtech.sh 
 
 # Set up Hypervisor
 
