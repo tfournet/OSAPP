@@ -97,18 +97,15 @@ for i in $(seq 1 $sleeptime); do
 done 
 echo "" 
 
-cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
+cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml"
 pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
-/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd &
+/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
 
-echo "Applying config via serial redirection..."
-for i in $(seq 1 $sleeptime); do
-  echo -n "."
-  sleep 1
-done 
+sleep 5
+
 echo "" 
 echo "Stopping HTTPD"
 systemctl stop httpd
