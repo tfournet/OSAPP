@@ -1,4 +1,5 @@
 #!/bin/bash
+# Stolen from https://gist.github.com/Naoya-Horiguchi/9425402
 
 which expect >/dev/null || dnf -y install expect 
 
