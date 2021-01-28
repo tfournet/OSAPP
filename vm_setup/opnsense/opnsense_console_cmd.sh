@@ -9,7 +9,6 @@ usage() {
     exit 0
 }
 
-e
 while getopts c: OPT
 do
   case $OPT in
@@ -28,7 +27,7 @@ cmd="$@"
 #echo $cmd
 expfile="/tmp/test-expect-script-$$.exp"
 
-echo "command: $cmd"
+#echo "command: $cmd"
 cat <<EOF > $expfile
 #!/usr/bin/expect
 
@@ -57,7 +56,7 @@ send "exit\n"
 send "\n"
 expect "Enter an option:"
 send "6\n"
-expect "\[y\/N\]:"
+expect "N]:"
 send "Y\n"
 send "\n"
 send -- "^]"

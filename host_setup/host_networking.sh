@@ -95,12 +95,8 @@ echo -n "Setting Temporary IP Address "
 vlan="10"
 ifname=br.$vlan
 ipaddr="192.168.1.2/24"
-gateway="192.168.1.1"
-locdns=$gateway
 echo "for $ifname to $ipaddr"
-#nmcli connection modify $ifname ifname $ifname dev $bondName id $vlan
-nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr ipv4.gateway $gateway
-nmcli connection modify $ifname ipv4.dns  $locdns
+nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr
 for dns_server in ${Allowed_DNS[@]}; do
     nmcli connection modify $ifname +ipv4.dns $dns_server
 done
