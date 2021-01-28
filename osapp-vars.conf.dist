@@ -29,8 +29,8 @@ siteName="site"
 #OPNSense_SHA256="72cbffe3bba4884586c8ded8dbca4cf30fb34a094602e5f681efde2deea595c6"
 
 # nano 21RC
-OPNSense_URL="https://mirror.wdc1.us.leaseweb.net/opnsense/releases/21.1/OPNsense-21.1.r1-OpenSSL-nano-amd64.img.bz2"
-OPNSense_SHA256="a60c3cb077b56202d3b02637054607f6180121b7da9faaf870f73a814dcfc2c7"
+OPNSense_URL="https://mirror.wdc1.us.leaseweb.net/opnsense/releases/21.1/OPNsense-21.1-OpenSSL-nano-amd64.img.bz2"
+OPNSense_SHA256="e5116c5037f4b4bbc68708e8f14ce023508ccf585164b778d6c158f170ea202f"
 
 OPNSense_VMName="OPNsense_Firewall"
 
