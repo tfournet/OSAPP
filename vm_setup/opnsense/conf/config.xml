@@ -212,7 +212,7 @@
     <primaryconsole>serial</primaryconsole>
     <secondaryconsole>video</secondaryconsole>
     <optimization>normal</optimization>
-    <hostname>myhostname</hostname>
+    <hostname>ZZZ-sitename-FW</hostname>
     <domain>custdom.tld</domain>
     <group>
       <name>admins</name>
@@ -467,7 +467,7 @@
     <opt9>
       <if>vtnet10</if>
       <descr>WAN2</descr>
-      <enable>1</enable>
+      <enable>0</enable>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <ipaddr>dhcp</ipaddr>

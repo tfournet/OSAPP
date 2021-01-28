@@ -56,12 +56,9 @@ echo sudo $osapp_inst/vm_setup/perch/create_perch.sh
 sudo $osapp_inst/container_setup/podman.sh
 
 # Create CyberCNS Container
-echo sudo $osapp_inst/container_setup/cybercns/cybercns.sh 
+sudo $osapp_inst/container_setup/cybercns/cybercns.sh 
 
 
-echo "End Secured Setup."
+echo "End Setup."
 
-# Install labtech
-
-#sh /usr/local/osapp/install-labtech.sh $cwa_LocID
 

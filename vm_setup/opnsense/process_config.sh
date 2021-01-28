@@ -15,7 +15,7 @@ input_config="/usr/local/osapp/vm_setup/opnsense/conf/config.xml"
 output_config="/var/www/html/opnsense/config.xml"
 
 sed \
-    -e "s/myhostname/$OPNsense_Hostname/g" \
+    -e "s/ZZZ-sitename-FW/$OPNsense_Hostname/g" \
     -e "s/sitename/$siteName/g" \
     -e "s/custdom.tld/$custTLD/g" \
     -e "s/\<rocommunity\>public\<\/rocommunity\>/\<rocommunity\>radermonitor\<\/rocommunity\>/g" \
