@@ -25,6 +25,6 @@ sed \
     -e "s/10.10./10.$siteSubnet./g" \
     $input_config > $output_config 
 
-lines=$(wc -l $output_config) 
+lines=$(wc -l $output_config | awk {'print $1'}) 
 echo "Wrote $lines lines to $output_config"
 

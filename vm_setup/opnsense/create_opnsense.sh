@@ -90,18 +90,25 @@ rm -rf /tmp/opnsense
 
 
 sleeptime="120"
-echo "Sleeping $sleeptime seconds"
+echo "Sleeping $sleeptime seconds while the VM runs through initial bootup"
 for i in $(seq 1 $sleeptime); do
   echo -n "."
   sleep 1
 done 
+echo "" 
 
 cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
-$osapp_inst/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd &
+/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd &
 
+echo "Applying config via serial redirection..."
+for i in $(seq 1 $sleeptime); do
+  echo -n "."
+  sleep 1
+done 
+echo "" 
 systemctl stop httpd
 systemctl disable httpd
