@@ -104,8 +104,6 @@ echo -e "\n\n"
 
 /usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
 
-sleep 5
-
 echo "" 
 echo "Stopping HTTPD"
 systemctl stop httpd
