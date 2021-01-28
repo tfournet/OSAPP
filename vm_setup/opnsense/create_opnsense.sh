@@ -72,6 +72,11 @@ virt-install $virtInstallOpts | virt-xml $wan0 | virt-xml $wan1 > $OPNSense_VMNa
 #virsh attach-interface --domain $OPNSense_VMName --type bridge --source br-$vlan --model virtio --config
 virsh define $OPNSense_VMName.xml 
 
+# Make sure all NICs are online
+for int in $(nmcli connection show | awk {'print $1'} | grep -v ^NAME) ; do 
+  nmcli connection up $int
+done
+
 virsh start $OPNSense_VMName
 virsh autostart $OPNSense_VMName
 

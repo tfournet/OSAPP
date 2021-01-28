@@ -12,7 +12,7 @@ systemctl start httpd
 
 mkdir -p /var/www/html/opnsense
 
-input_config="$osapp_inst/vm_setup/opnsense/conf/config.xml"
+input_config="/usr/local/osapp/vm_setup/opnsense/conf/config.xml"
 output_config="/var/www/html/opnsense/config.xml"
 
 sed \

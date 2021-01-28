@@ -18,10 +18,7 @@ while [ ! -f $compconfig ]; do
 done 
 
 cwa_LocID=$(grep location_id /usr/local/ltechagent/agent_config | awk {'print $2'})
-while ! [ $cwa_LocID -eq $cwa_LocID 2>/dev/null ]; do 
-    echo -n "ConnectWise Automate (LabTech) Site ID: "
-    read cwa_LocID 
-done 
+ 
 sed -ie "s/^cwa_LocID=.*/cwa_LocID=$cwa_LocID/g" $conf 
 
 
