@@ -59,10 +59,9 @@ expect "Enter an option:"
 send "6\n"
 expect "\[y\/N\]:"
 send "Y\n"
+send "\n"
 send -- "^]"
 interact
-send \"\"
-expect eof
 EOF
 
 #cat $expfile
