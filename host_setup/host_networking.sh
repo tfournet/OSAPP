@@ -91,18 +91,19 @@ nmcli connection down   $ifname
 nmcli connection up     $ifname 
 
 ## Set IP for this host on VLAN 10 (temporary)
-echo -n "Setting Temporary IP Address "
+tempip="192.168.1.2"
+echo -n "Setting Temporary IP Address $temip"
 vlan="10"
 ifname=br.$vlan
-ipaddr="192.168.1.2/24"
-echo "for $ifname to $ipaddr"
-nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr
-for dns_server in ${Allowed_DNS[@]}; do
-    nmcli connection modify $ifname +ipv4.dns $dns_server
-done
-nmcli connection down   $ifname
-nmcli connection up     $ifname 
-echo -e "\n\n\n"
+#ipaddr="192.168.1.2/24"
+#echo "for $ifname to $ipaddr"
+#nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr
+#for dns_server in ${Allowed_DNS[@]}; do
+#    nmcli connection modify $ifname +ipv4.dns $dns_server
+#done
+#nmcli connection down   $ifname
+#nmcli connection up     $ifname 
+ifconfig $ifname $tempip 255.255.255.0
 
 echo -e "\n\n\n"
 nmcli connection show

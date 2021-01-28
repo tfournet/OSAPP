@@ -25,23 +25,23 @@ recon_max: 59000
 recon_randomize: True
 ' >> $containerdir/salt/minion.d/minion.conf
 
-echo '
+echo """
 version: "3"
 services:
   cybercnsvulnerabilityagent:
     container_name: cyberCNSAgent
     privileged: true
-    image: "cybercnssaas/cybercns_agent"
+    image: \"cybercnssaas/cybercns_agent\"
     network_mode: host
     # environment:
     #   LOG_LEVEL: "debug"
     restart: always
     volumes:
-      - "/opt/CyberCNSAgent/logs:/opt/CyberCNSAgent/logs"
-      - "/opt/CyberCNSAgent/salt:/etc/salt"
-      - "/opt/CyberCNSAgent/minion:/var/lib/salt/pki/minion"
-      - "/opt/CyberCNSAgent/cache:/var/cache/salt"
-' > $containerdir/docker-compose.yaml
+      - \"$containerdir/logs:/opt/CyberCNSAgent/logs\"
+      - \"$containerdir/salt:/etc/salt\"
+      - \"$containerdir/minion:/var/lib/salt/pki/minion\"
+      - \"$containerdir/cache:/var/cache/salt\"
+""" > $containerdir/docker-compose.yaml
 
 cd $containerdir
 $compose pull

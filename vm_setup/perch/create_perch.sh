@@ -39,6 +39,8 @@ virt-xml -d $Perch_VMName --remove-device --network all
 
 echo "Adding New Interfaces"
 virsh attach-interface --domain $Perch_VMName --type bridge --source br.20 --model virtio --config 
+virsh attach-interface --domain $Perch_VMName --type bridge --source br.10 --model virtio --config 
+
 
 virsh domiflist --domain $Perch_VMName 
 
@@ -79,7 +81,7 @@ sed -ie "s/{{hostname}}/$perch_hostname/g" $osapp_inst/vm_setup/perch/perch_firs
 sed -e  "s/{{sitesubnet}}/$siteSubnet/g"   $osapp_inst/vm_setup/perch/perch_ifcfg-eth0 > /tmp/ifcfg-eth0
 
 virt-customize -d $Perch_VMName --copy-in /tmp/ifcfg-eth0:/etc/sysconfig/network-scripts/
-virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/install-labtech.sh:/usr/local/bin/
+virt-customize -d $Perch_VMName --copy-in $osapp_inst/install-labtech.sh:/usr/local/bin/
 #virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/install-labtech.sh
 virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/perch/perch_vxlan.sh:/usr/local/bin/
 #virt-customize -d $Perch_VMName --chmod 0755:/usr/local/bin/perch_vxlan.sh
@@ -88,17 +90,11 @@ virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/perch/perch_first
 
 firstboot_cmds="/usr/local/bin/perch_firstboot.sh"
 virt-customize -d $Perch_VMName --firstboot-command "$firstboot_cmds"
-
-
-
-
     
 # Start VM
 virsh start $Perch_VMName
 virsh autostart $Perch_VMName
 sleep 2
-
-#virt-manager --connect qemu:///system --show-domain-console Perch_Sensor &
 
 echo -n "Waiting for $Perch_VMName to boot.."
 sleep 10
@@ -111,8 +107,9 @@ chmod a+x /etc/rc.local
 
 /usr/local/bin/perch_monitor.sh
 
+sleep 10 
 echo -e "\nLogging into Perch Sensor. Please complete the configuration wizard for the site."
-ssh -o 'StrictHostKeyChecking no' perch@10.$siteSubnet.20.3 
+echo "ssh  perch@10.$siteSubnet.20.3 "
 
 
 #rm -rf /tmp/perch

@@ -3,7 +3,7 @@
 source /etc/osapp/osapp-vars.conf
 
 while ( ! echo $dif | grep -q "vnet" ) ; do 
-    dif=$(virsh domiflist Perch_Sensor | grep bridge | awk {'print $1'}) 
+    dif=$(virsh domiflist Perch_Sensor | grep bridge | grep br.10 | awk {'print $1'}) 
     sleep 1 
 done
 
