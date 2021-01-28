@@ -72,7 +72,7 @@ done
 virt-sysprep   -d $Perch_VMName $inject
 #virt-customize -d $Perch_VMName --chmod 0600:/root/.ssh/authorized_keys
 
-perch_hostname="$custAbbr-$siteName-Perch"
+perch_hostname=$Perch_Hostname 
 
 sed -ie "s/{{cwa_LocID}}/$cwa_LocID/g"     $osapp_inst/vm_setup/perch/perch_firstboot.sh
 sed -ie "s/{{hostname}}/$perch_hostname/g" $osapp_inst/vm_setup/perch/perch_firstboot.sh 
