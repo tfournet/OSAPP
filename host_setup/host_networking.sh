@@ -3,7 +3,8 @@
 source /etc/osapp/osapp-vars.conf
 
 # Set Hostname
-#hostnamectl me.com
+hostnamectl set-hostname $OSAPP_Hostname 
+hostnamectl set-location $siteName 
 
 #rm -f ~/.ssh/known_hosts
 
