@@ -83,7 +83,7 @@ virsh autostart $OPNSense_VMName
 
 #virt-manager --connect qemu:///system --show-domain-console $OPNSense_VMName &
 
-rm -rf /tmp/opnsense
+rm -rf /tmp/opnsense 2>/dev/null 
 
 
 /usr/local/osapp/vm_setup/opnsense/process_config.sh 
@@ -110,5 +110,6 @@ for i in $(seq 1 $sleeptime); do
   sleep 1
 done 
 echo "" 
+echo "Stopping HTTPD"
 systemctl stop httpd
 systemctl disable httpd
