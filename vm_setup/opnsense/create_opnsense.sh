@@ -86,12 +86,15 @@ virsh autostart $OPNSense_VMName
 rm -rf /tmp/opnsense
 
 
-$osapp/inst/vm_setup/opnsense/process_config.sh 
+/usr/local/osapp/vm_setup/opnsense/process_config.sh 
 
 
-sleeptime="3m"
-echo "Sleeping $sleeptime"
-sleep $sleeptime
+sleeptime="120"
+echo "Sleeping $sleeptime seconds"
+for i in $(seq 1 $sleeptime); do
+  echo -n "."
+  sleep 1
+done 
 
 cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && shutdown -r now"
 pass="opnsense"

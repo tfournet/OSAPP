@@ -3,12 +3,14 @@
 source /etc/osapp/osapp-vars.conf
 
 
+
+dnf -y install httpd
+systemctl start httpd
+
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
 firewall-cmd --reload
 
-dnf -y install httpd
-systemctl start httpd
 
 mkdir -p /var/www/html/opnsense
 
@@ -22,3 +24,7 @@ sed \
     -e "s/\<rocommunity\>public\<\/rocommunity\>/\<rocommunity\>radermonitor\<\/rocommunity\>/g" \
     -e "s/10.10./10.$siteSubnet./g" \
     $input_config > $output_config 
+
+lines=$(wc -l $output_config) 
+echo "Wrote $lines lines to $output_config"
+
