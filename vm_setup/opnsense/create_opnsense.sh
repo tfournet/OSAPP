@@ -10,33 +10,36 @@ rm -rf $tmpdir 2>/dev/null
 mkdir -p $tmpdir
 cd $tmpdir
 
-echo "Downloading OPNSense Image from $OPNSense_URL"
-if [ -f /tmp/$dlfile ]; then
-  cp /tmp/$dlfile $tmpdir
-else
-  curl -o $tmpdir/$dlfile $OPNSense_URL
-  cp $tmpdir/$dlfile /tmp
-fi
-Download_SHA256=$(sha256sum $dlfile | awk {'print $1'})
+while ! [ -f /var/lib/libvirt/pool0/$OPNSense_VMName.qcow ] ; do 
+  sleep 5
+  echo "Downloading OPNSense Image from $OPNSense_URL"
+  if [ -f /tmp/$dlfile ]; then
+    cp /tmp/$dlfile $tmpdir
+  else
+    curl -o $tmpdir/$dlfile $OPNSense_URL
+    cp $tmpdir/$dlfile /tmp
+  fi
+  Download_SHA256=$(sha256sum $dlfile | awk {'print $1'})
 
-echo "Comparing Downloaded file checksum: $Download_SHA256"
-echo "with Vendor-provided file checksum: $OPNSense_SHA256"
+  echo "Comparing Downloaded file checksum: $Download_SHA256"
+  echo "with Vendor-provided file checksum: $OPNSense_SHA256"
 
-if [[ $Download_SHA256 != $OPNSense_SHA256 ]] ; then
-  echo "ERROR: Unable to verify authenticity of downloaded OPNSense Package. Please check the variables file https://github.com/RaderSolutions/osapp/osapp-vars.conf for up to date URLs and SHA256sums"
-  echo "Repair this and try again"
-  exit 100
-else 
-  echo "Hashes match"
-fi
+  if [[ $Download_SHA256 != $OPNSense_SHA256 ]] ; then
+    echo "ERROR: Unable to verify authenticity of downloaded OPNSense Package. Please check the variables file https://github.com/RaderSolutions/osapp/osapp-vars.conf for up to date URLs and SHA256sums"
+    echo "Repair this and try again"
+    exit 100
+  else 
+    echo "Hashes match"
+  fi
 
-echo "Extracting Image"
-bzip2 -vdf $dlfile
+  echo "Extracting Image"
+  bzip2 -vdf $dlfile
 
-echo "Converting and Importing VM Image"
-qemu-img convert -f raw -O qcow2 OPNsense.img $OPNSense_VMName.qcow2
-qemu-img resize $OPNSense_VMName.qcow2 +8G
-mv -f $OPNSense_VMName.qcow2 /var/lib/libvirt/pool0/$OPNSense_VMName.qcow
+  echo "Converting and Importing VM Image"
+  qemu-img convert -f raw -O qcow2 OPNsense.img $OPNSense_VMName.qcow2
+  qemu-img resize $OPNSense_VMName.qcow2 +8G
+  mv -f $OPNSense_VMName.qcow2 /var/lib/libvirt/pool0/$OPNSense_VMName.qcow
+done 
 
 defaultBridge="br-"$nicBondType"0"
 
