@@ -37,8 +37,7 @@ OPNSense_SHA256=\"${10}\"
 
 tmpScript="/usr/local/bin/run-osapp-setup.sh"
 rm -f $tmpScript 
-echo '
-#!/bin/sh
+echo '#!/bin/sh
 
 touch /tmp/osapp-setup-running
 
