@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "apps": {
+    "tools": {
         "osapp-setup": {
             "label": "Setup OSAPP",
             "path": "osapp.html"
