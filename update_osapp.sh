@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /etc/osapp/osapp-vars.conf
+source /etc/osapp/osapp-vars.conf 2>/dev/null 
 
 
 rm -rf /tmp/osapp
