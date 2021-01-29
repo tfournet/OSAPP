@@ -72,7 +72,8 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 echo "End Setup."
 
-""" > /tmp/run-osapp-setup.sh 
+""" 
+echo $mycommands > /tmp/run-osapp-setup.sh 
 chmod a+x /tmp/run-osapp-setup.sh 
 systemd-run --unit=OSAPP-Setup /tmp/run-osapp-setup.sh 
 journalctl -f -u OSAPP-Setup 
