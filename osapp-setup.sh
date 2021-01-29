@@ -50,7 +50,7 @@ sudo $osapp_inst/host_setup/host_kvm_setup.sh
 
 sudo $osapp_inst/host_setup/host_networking.sh
 
-virt-manager &
+#virt-manager &
 
 
 ### VMs ###
@@ -59,7 +59,7 @@ virt-manager &
 sudo $osapp_inst/vm_setup/opnsense/create_opnsense.sh
 
 # Import Perch VM
-echo sudo $osapp_inst/vm_setup/perch/create_perch.sh
+sudo $osapp_inst/vm_setup/perch/create_perch.sh
 
 
 
