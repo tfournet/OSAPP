@@ -59,6 +59,7 @@ send "6\n"
 expect ": "
 send "Y\n"
 send "\n"
+send "\n"
 send -- "^]"
 close
 EOF
