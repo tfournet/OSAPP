@@ -5,7 +5,7 @@ const button = document.getElementById("config");
 
 function ping_run() {
     //cockpit.spawn(["ping", "-c", "4", address.value])
-    cockpit.spawn(["/usr/bin/whoami"])
+    cockpit.spawn(["touch","/usr/local/share/testfile"])
         .stream(ping_output)
         .then(ping_success)
         .catch(ping_fail);
