@@ -37,7 +37,7 @@ OPNSense_SHA256=${10}
 """ > $conf 
 
 
-mycommands="""
+echo """
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
@@ -72,8 +72,7 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 echo "End Setup."
 
-""" 
-echo $mycommands > /tmp/run-osapp-setup.sh 
+""" > /tmp/run-osapp-setup.sh 
 chmod a+x /tmp/run-osapp-setup.sh 
 systemd-run --unit=OSAPP-Setup /tmp/run-osapp-setup.sh 
 journalctl -f -u OSAPP-Setup 
