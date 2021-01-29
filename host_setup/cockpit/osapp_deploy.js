@@ -1,10 +1,10 @@
-const address = document.getElementById("cybercns_hostname");
+const extDns1 = document.getElementById("extDns1");
 const output = document.getElementById("output");
 const result = document.getElementById("result");
 const button = document.getElementById("config");
 
 function ping_run() {
-    cockpit.spawn(["ping", "-c", "4", address.value])
+    cockpit.spawn(["ping", "-c", "4", extDns1.value])
         .stream(ping_output)
         .then(ping_success)
         .catch(ping_fail);
