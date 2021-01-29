@@ -1,4 +1,4 @@
-const address = document.getElementById("extDns1");
+const address = document.getElementById("cybercns_hostname");
 const output = document.getElementById("output");
 const result = document.getElementById("result");
 const button = document.getElementById("config");
