@@ -35,7 +35,7 @@ OPNSense_URL=\"$9\"
 OPNSense_SHA256=\"${10}\"
 """ > $conf 
 
-tmpScript="/tmp/run-osapp-setup.sh"
+tmpScript="/usr/local/bin/run-osapp-setup.sh"
 rm -f $tmpScript 
 echo '
 #!/bin/sh
