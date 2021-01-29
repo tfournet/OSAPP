@@ -31,7 +31,7 @@ services:
   cybercnsvulnerabilityagent:
     container_name: cyberCNSAgent
     privileged: true
-    image: \"https://docker.io/cybercnssaas/cybercns_agent\"
+    image: "docker.io/cybercnssaas/cybercns_agent"
     network_mode: host
     # environment:
     #   LOG_LEVEL: "debug"
