@@ -13,8 +13,9 @@ echo "Beginning Setup"
 
 # Add RMM Agent(s)
 
-sudo $osapp_inst/install-labtech.sh 
-
+if ! [ $cwa_LocID -gt 0 ]; then
+    sudo $osapp_inst/install-labtech.sh 
+fi
 # Install cockpit addons
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
 
