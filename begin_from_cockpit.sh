@@ -15,29 +15,29 @@ mkdir -p /etc/osapp
 conf="/etc/osapp/osapp-vars.conf"
 
 echo """
-osapp_inst="/usr/local/osapp"
-vpool="pool0"
-nicBondType="bond"
+osapp_inst=\"/usr/local/osapp\"
+vpool=\"pool0\"
+nicBondType=\"bond\"
 VLAN_IDs=(10 20 30 40 50 60 70 80 100)
-OSAPP_Hostname=""
-Perch_Hostname=""
-OPNsense_Hostname="" 
-OPNSense_VMName="OPNsense_Firewall"
-Perch_VMName="Perch_Sensor"
-custAbbr=$1
-custTld=$2
-siteSubnet=$3
-Allowed_DNS=("$4" "$5")
-cybercns_hostname=$6
-cybercns_siteId=$7
-Perch_URL=$8
-OPNSense_URL=$9
-OPNSense_SHA256=${10}
+OSAPP_Hostname=
+Perch_Hostname=
+OPNsense_Hostname= 
+OPNSense_VMName=\"OPNsense_Firewall\"
+Perch_VMName=\"Perch_Sensor\"
+custAbbr=\"$1\"
+custTld=\"$2\"
+siteSubnet=\"$3\"
+Allowed_DNS=(\"$4\" \"$5\")
+cybercns_hostname=\"$6\"
+cybercns_siteId=\"$7\"
+Perch_URL=\"$8\"
+OPNSense_URL=\"$9\"
+OPNSense_SHA256=\"${10}\"
 """ > $conf 
 
 tmpScript="/tmp/run-osapp-setup.sh"
 rm -f $tmpScript 
-echo """
+echo '
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
@@ -73,8 +73,7 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 
 echo "End Setup."
-
-""" > $tmpScript
+' > $tmpScript
 
 chmod a+x $tmpScript 
 systemd-run --unit=OSAPP-Setup $tmpScript
