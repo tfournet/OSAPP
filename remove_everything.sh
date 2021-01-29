@@ -8,4 +8,7 @@ rm -rf /usr/local/containers/cybercns*
 
 /usr/local/osapp/host_setup/reset_networking.sh 
 
+rm -rf /etc/osapp 
+
+/usr/local/ltechagent/uninstaller.sh 
 
