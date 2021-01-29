@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Created by Tim Fournet - tfournet@radersolutions.com
+((
 
 if ! [ -f /etc/osapp/osapp-vars.conf ] ; then
     sudo /usr/local/osapp/get_variables.sh 
@@ -69,4 +70,5 @@ sudo $osapp_inst/container_setup/cybercns/cybercns.sh
 
 echo "End Setup."
 
+) 2>&1) | tee /var/log/osapp-setup.log 
 

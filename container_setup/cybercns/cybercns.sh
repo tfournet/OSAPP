@@ -47,4 +47,6 @@ cd $containerdir
 $compose pull
 $compose up -d 
 
+sleep 5
+podman ps 
 
