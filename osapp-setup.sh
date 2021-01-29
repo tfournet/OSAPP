@@ -2,6 +2,9 @@
 
 # Created by Tim Fournet - tfournet@radersolutions.com
 
+if ! [ -f /etc/osapp/osapp-vars.conf ] ; then
+    sudo /usr/local/osapp/get_variables.sh 
+fi
 
 mkdir -p /etc/osapp 
 conf=/etc/osapp/osapp-vars.conf 
@@ -12,19 +15,7 @@ source /etc/osapp/osapp-vars.conf
 
 echo "Beginning Setup"
 
-# Add RMM Agent(s)
 
-if  [ $cwa_LocID -eq $cwa_LocID ] && [ $cwa_LocID ]; then
-    if ! [ -f /usr/local/ltechagent/ltechagent ]; then 
-        sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
-    fi 
-else
-  echo -n "Enter CWA Location ID: "
-  read cwa_LocID
-  sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
-fi
-
-sudo /usr/local/osapp/get_variables.sh 
 
 # Install cockpit addons
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording

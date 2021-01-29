@@ -4,11 +4,16 @@ conf="/etc/osapp/osapp-vars.conf"
 cp -f /usr/local/osapp/osapp-vars.conf.dist $conf 
 
 
-if [ ! -f /usr/local/ltechagent/ltechagent ]; then 
-    echo "ERROR Labtech not installed"
-    pause
-    exit 101 
-fi
+while [ ! -f /usr/local/ltechagent/ltechagent ]; do
+    echo "Installing Labtech"
+    if  [ $cwa_LocID -eq $cwa_LocID ] && [ $cwa_LocID ]; then
+        sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
+    fi 
+    else
+        echo -n "Enter CWA Location ID: "
+        read cwa_LocID
+    fi
+done
 
 compconfig="/usr/local/ltechagent/computer_config"
  
