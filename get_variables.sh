@@ -6,6 +6,7 @@ cp -f /usr/local/osapp/osapp-vars.conf.dist $conf
 
 if [ ! -f /usr/local/ltechagent/ltechagent ]; then 
     echo "ERROR Labtech not installed"
+    pause
     exit 101 
 fi
 

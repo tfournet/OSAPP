@@ -5,7 +5,10 @@
 
 mkdir -p /etc/osapp 
 conf=/etc/osapp/osapp-vars.conf 
-cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
+
+sudo /usr/local/osapp/get_variables.sh 
+
+# cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
 
 source $conf 
 
@@ -13,7 +16,13 @@ echo "Beginning Setup"
 
 # Add RMM Agent(s)
 
-sudo $osapp_inst/install-labtech.sh 
+if  [ $cwa_LocID -eq $cwa_LocID ] && [ $cwa_LocID ]; then
+  sudo $osapp_inst/install-labtech.sh $cwa_LocID
+else
+  echo -n "Enter CWA Location ID: "
+  read cwa_LocID
+  sudo $osapp_inst/install-labtech.sh $cwa_LocID
+fi
 
 # Install cockpit addons
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
