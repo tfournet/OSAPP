@@ -5,7 +5,7 @@
 
 mkdir -p /etc/osapp 
 conf=/etc/osapp/osapp-vars.conf 
-cp  /usr/local/osapp/osapp-vars.conf $conf 
+cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
 
 source $conf 
 
