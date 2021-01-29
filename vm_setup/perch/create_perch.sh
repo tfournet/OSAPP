@@ -9,30 +9,14 @@ firstboot_cmds=""
 # Download and Import VM
 mkdir -p /tmp/perch
 
-dlfile="/tmp/perch_sensor.ova"
+dlfile="/tmp/perch/perch_sensor.ova"
 
-echo "Downloading Perch Appliance Image from $Perch_URL"
-if [[ -f /tmp/$dlfile ]]; then
-  cp /tmp/$dlfile $tmpdir
-  echo "File exists already"
-else
-  curl -o $tmpdir/$dlfile $Perch_URL
-  cp $tmpdir/$dlfile /tmp
-fi
-
-#ls
-#wget -O /tmp/perch/perch_sensor.ova $Perch_URL
+while ! [ -f $dlfile ]; do 
+  wget -O $dlfile $Perch_URL
+done
 
 echo "Extracting and Converting Image..."
 virt-v2v -i ova /tmp/perch/perch_sensor.ova -of qcow2 -os $vpool -on $Perch_VMName
-
-
-# Customizing VM Setup
-## Create Perch Monitor Port
-#nmcli connection delete con-name $monitorPort
-#nmcli connection add type bridge con-name $monitorPort ifname $monitorPort ipv4.method disabled ipv6.method ignore
-
-
 
 echo "Removing Existing Interfaces"
 virt-xml -d $Perch_VMName --remove-device --network all
