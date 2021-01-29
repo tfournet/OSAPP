@@ -81,6 +81,8 @@ rm -f /tmp/osapp-setup-running
 
 chmod a+x $tmpScript 
 unitid="OSAPP-Setup-${RANDOM}"
+echo "Starting job: watch with journalctl -f -u $unitid"
+echo ""
 systemd-run --unit=$unitid $tmpScript
 journalctl -f -u $unitid
 
