@@ -16,7 +16,6 @@ conf="/etc/osapp/osapp-vars.conf"
 
 echo """
 osapp_inst="/usr/local/osapp"
-VLAN_IDs=(10 20 30 40 50 60 70 80 100)
 vpool="pool0"
 nicBondType="bond"
 VLAN_IDs=(10 20 30 40 50 60 70 80 100)
@@ -36,13 +35,16 @@ OPNSense_URL=$9
 OPNSense_SHA256=${10}
 """ > $conf 
 
-
+tmpScript="/tmp/run-osapp-setup.sh"
+rm -f $tmpScript 
 echo """
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
-# Install cockpit addons
+# Install OS addons
+dnf -y install epel-release
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
+
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 # Set up Hypervisor
@@ -72,9 +74,10 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 echo "End Setup."
 
-""" > /tmp/run-osapp-setup.sh 
-chmod a+x /tmp/run-osapp-setup.sh 
-systemd-run --unit=OSAPP-Setup /tmp/run-osapp-setup.sh 
+""" > $tmpScript
+
+chmod a+x $tmpScript 
+systemd-run --unit=OSAPP-Setup $tmpScript
 journalctl -f -u OSAPP-Setup 
 
 
