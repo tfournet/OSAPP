@@ -15,11 +15,11 @@ echo "Beginning Setup"
 # Add RMM Agent(s)
 
 if  [ $cwa_LocID -eq $cwa_LocID ] && [ $cwa_LocID ]; then
-  sudo $osapp_inst/install-labtech.sh $cwa_LocID
+  sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
 else
   echo -n "Enter CWA Location ID: "
   read cwa_LocID
-  sudo $osapp_inst/install-labtech.sh $cwa_LocID
+  sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
 fi
 
 sudo /usr/local/osapp/get_variables.sh 
