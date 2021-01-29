@@ -8,14 +8,16 @@ conf=/etc/osapp/osapp-vars.conf
 
 # cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
 
-source $conf 
+source /etc/osapp/osapp-vars.conf 
 
 echo "Beginning Setup"
 
 # Add RMM Agent(s)
 
 if  [ $cwa_LocID -eq $cwa_LocID ] && [ $cwa_LocID ]; then
-  sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
+    if ! [ -f /usr/local/ltechagent/ltechagent ]; then 
+        sudo /usr/local/osapp/install-labtech.sh $cwa_LocID
+    fi 
 else
   echo -n "Enter CWA Location ID: "
   read cwa_LocID
