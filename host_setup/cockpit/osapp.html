@@ -8,11 +8,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <table class="form-table-ct">
-            <tr>
-                <td><label class="control-label" for="address">Address</label></td>
-                <td><input class="form-control" id="address" value="8.8.8.8"></td>
-            </tr>
+        <table class="form-table-ct;width=500px">
             <tr>
                 <td><label class="control-label" for="custAbbr">Client Abbreviation</label></td>
                 <td><input class="form-control" id="custAbbr" value=""></td>
@@ -54,13 +50,13 @@
                 <td><input class="form-control" id="OPNSense_SHA256" value="e5116c5037f4b4bbc68708e8f14ce023508ccf585164b778d6c158f170ea202f"></td>
             </tr>
             <tr>
-                <td><button class="pf-c-button pf-m-primary" id="ping">Ping</button></td>
+                <td><button class="pf-c-button pf-m-primary" id="config">Begin Configuration</button></td>
                 <td><span id="result"></span></td>
             </tr>
         </table>
         <pre id="output"></pre>
     </div>
 
-    <script src="pinger.js"></script>
+    <script src="osapp-deploy.js"></script>
 </body>
 </html>
