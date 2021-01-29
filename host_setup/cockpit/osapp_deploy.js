@@ -13,17 +13,14 @@ const result = document.getElementById("result");
 const button = document.getElementById("config");
 
 function setup_run() {
-    cockpit.spawn(["/usr/local/osapp/begin_from_cockpit.sh", 
-        custAbbr.value,
-        custTld.value,
-        siteSubnet.value, 
+    cockpit.spawn(["/usr/local/osapp/begin_from_cockpit.sh", custAbbr.value, custTld.value, siteSubnet.value, 
         extDns1.value,
         extDns2.value,
         cybercns_hostname.value,
         cybercns_siteId.value,
         Perch_URL.value,
         OPNSense_URL.value,
-        OPNSense_SHA256.value,
+        OPNSense_SHA256.value
     ])
         .stream(setup_output)
         .then(setup_success)
