@@ -1,7 +1,7 @@
 const address = document.getElementById("extDns1");
 const output = document.getElementById("output");
 const result = document.getElementById("result");
-const button = document.getElementById("ping");
+const button = document.getElementById("config");
 
 function ping_run() {
     cockpit.spawn(["ping", "-c", "4", address.value])
