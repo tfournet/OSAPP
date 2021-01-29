@@ -1,5 +1,9 @@
 #!/bin/sh
 
-mkdir /usr/local/share/cockpit/osapp
+plugindir="/usr/local/share/cockpit/osapp"
+mkdir -p $plugindir 
 
-cp -var 
+
+cp -var /usr/local/osapp/host_setup/cockpit/* $plugindir 
+
+cockpit-bridge --packages 
