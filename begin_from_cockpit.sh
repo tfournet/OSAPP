@@ -38,6 +38,10 @@ OPNSense_SHA256=\"${10}\"
 tmpScript="/tmp/run-osapp-setup.sh"
 rm -f $tmpScript 
 echo '
+#!/bin/sh
+
+touch /tmp/osapp-setup-running
+
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
@@ -73,6 +77,7 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 
 echo "End Setup."
+rm -f /tmp/osapp-setup-running
 ' > $tmpScript
 
 chmod a+x $tmpScript 
