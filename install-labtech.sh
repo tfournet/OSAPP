@@ -6,9 +6,9 @@ source /etc/osapp/osapp-vars.conf || cwa_LocID=$1
 tmpdir="/tmp/cwa"
 
 if [[ ! $cwa_LocID -gt 0 ]]; then
-    echo "ERROR: Labtech (CWA) LocationID is not set correctly"
-    exit 1
-    else "Setting Labtech LocationID to $cwa_LocID"
+    cwa_LocID=$1
+else 
+    echo "Setting Labtech LocationID to $cwa_LocID"
 fi
 
 which unzip || yum -y install unzip
