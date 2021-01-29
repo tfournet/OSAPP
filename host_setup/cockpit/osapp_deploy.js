@@ -4,7 +4,8 @@ const result = document.getElementById("result");
 const button = document.getElementById("config");
 
 function ping_run() {
-    cockpit.spawn(["ping", "-c", "4", address.value])
+    //cockpit.spawn(["ping", "-c", "4", address.value])
+    cockpit.spawn(["whoami"])
         .stream(ping_output)
         .then(ping_success)
         .catch(ping_fail);
