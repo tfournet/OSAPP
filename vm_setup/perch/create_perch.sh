@@ -21,7 +21,7 @@ else
 fi
 
 #ls
-wget -O /tmp/perch/perch_sensor.ova $Perch_URL
+#wget -O /tmp/perch/perch_sensor.ova $Perch_URL
 
 echo "Extracting and Converting Image..."
 virt-v2v -i ova /tmp/perch/perch_sensor.ova -of qcow2 -os $vpool -on $Perch_VMName
