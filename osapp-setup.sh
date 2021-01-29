@@ -6,8 +6,6 @@
 mkdir -p /etc/osapp 
 conf=/etc/osapp/osapp-vars.conf 
 
-sudo /usr/local/osapp/get_variables.sh 
-
 # cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
 
 source $conf 
@@ -23,6 +21,8 @@ else
   read cwa_LocID
   sudo $osapp_inst/install-labtech.sh $cwa_LocID
 fi
+
+sudo /usr/local/osapp/get_variables.sh 
 
 # Install cockpit addons
 dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
