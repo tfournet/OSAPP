@@ -88,28 +88,3 @@ virsh autostart $OPNSense_VMName
 
 rm -rf /tmp/opnsense 2>/dev/null 
 
-
-/usr/local/osapp/vm_setup/opnsense/process_config.sh 
-
-
-sleeptime="120"
-echo "Sleeping $sleeptime seconds while the VM runs through initial bootup"
-for i in $(seq 1 $sleeptime); do
-  echo -n "."
-  sleep 1
-done 
-echo "" 
-
-cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml"
-pass="opnsense"
-echo "Next we will log into $OPNSense_VMName and run: $cmd"
-echo -e "\n\n"
-
-/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
-
-echo "" 
-echo "Waiting for VM to reboot"
-sleep 30 
-echo "Stopping HTTPD"
-systemctl stop httpd
-systemctl disable httpd

@@ -28,3 +28,16 @@ sed \
 lines=$(wc -l $output_config | awk {'print $1'}) 
 echo "Wrote $lines lines to $output_config"
 
+cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && cat /conf/config.xml"
+pass="opnsense"
+echo "Next we will log into $OPNSense_VMName and run: $cmd"
+echo -e "\n\n"
+
+/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
+
+echo "" 
+echo "Waiting for VM to reboot"
+sleep 60 
+#echo "Stopping HTTPD"
+#systemctl stop httpd
+#systemctl disable httpd
