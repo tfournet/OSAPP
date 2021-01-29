@@ -14,12 +14,15 @@ mkdir -p /var/www/html/opnsense
 input_config="/usr/local/osapp/vm_setup/opnsense/conf/config.xml"
 output_config="/var/www/html/opnsense/config.xml"
 
+perch_mac=$(virsh domiflist $Perch_VMName | grep br.20 | awk {'print $5'})
+
 sed \
     -e "s/ZZZ-sitename-FW/$OPNsense_Hostname/g" \
     -e "s/sitename/$siteName/g" \
     -e "s/custdom.tld/$custTLD/g" \
     -e "s/\<rocommunity\>public\<\/rocommunity\>/\<rocommunity\>radermonitor\<\/rocommunity\>/g" \
     -e "s/10.10./10.$siteSubnet./g" \
+    -e "s/11:00:11:00:11:00/$perch_mac/g" \
     $input_config > $output_config 
 
 lines=$(wc -l $output_config | awk {'print $1'}) 

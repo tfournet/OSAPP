@@ -55,11 +55,14 @@ sudo $osapp_inst/host_setup/host_networking.sh
 
 ### VMs ###
 
+# Import Perch VM
+sudo $osapp_inst/vm_setup/perch/create_perch.sh
+
 # Import Firewall VM(s)
 sudo $osapp_inst/vm_setup/opnsense/create_opnsense.sh
 
-# Import Perch VM
-sudo $osapp_inst/vm_setup/perch/create_perch.sh
+# Boot Perch VM 
+sudo $osapp_inst/vm_setup/perch/start_perch.sh 
 
 
 

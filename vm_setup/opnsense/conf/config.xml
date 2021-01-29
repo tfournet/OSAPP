@@ -532,6 +532,16 @@
       <winsserver/>
       <dnsserver>10.10.20.1</dnsserver>
       <ntpserver/>
+            <staticmap>
+        <mac>11:00:11:00:11:00</mac>
+        <cid>ZZZ-sitename-Perch</cid>
+        <ipaddr>10.10.20.3</ipaddr>
+        <hostname>ZZZ-sitename-Perch</hostname>
+        <gateway>10.10.20.1</gateway>
+        <winsserver/>
+        <dnsserver/>
+        <ntpserver/>
+      </staticmap>
     </opt1>
     <opt2>
       <enable>1</enable>
