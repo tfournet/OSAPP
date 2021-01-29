@@ -80,8 +80,9 @@ rm -f /tmp/osapp-setup-running
 ' > $tmpScript
 
 chmod a+x $tmpScript 
-systemd-run --unit=OSAPP-Setup $tmpScript
-journalctl -f -u OSAPP-Setup 
+id=${RANDOM}
+systemd-run --unit=OSAPP-Setup-${RANDOM} $tmpScript
+journalctl -f -u OSAPP-Setup-${RANDOM} 
 
 
 
