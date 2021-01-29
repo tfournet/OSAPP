@@ -1,6 +1,7 @@
 #!/bin/sh
 
 conf="/etc/osapp/osapp-vars.conf"
+mkdir -p /etc/osapp/ 
 cp -f /usr/local/osapp/osapp-vars.conf.dist $conf 
 
 

@@ -6,8 +6,7 @@ if ! [ -f /etc/osapp/osapp-vars.conf ] ; then
     sudo /usr/local/osapp/get_variables.sh 
 fi
 
-mkdir -p /etc/osapp 
-conf=/etc/osapp/osapp-vars.conf 
+conf="/etc/osapp/osapp-vars.conf" 
 
 # cp  /usr/local/osapp/osapp-vars.conf.dist $conf 
 
