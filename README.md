@@ -14,8 +14,9 @@ This installs the OS and a Cockpit plugin to start the configuration via a web U
 * OPNsense Firewall - Configured with a good set of security defaults, including network segmentation
 * Perch Sensor VM - Downloaded from https://perchsecurity.com
 * CyberCNS Vulnerability Management Software - Onsite datacollection container - https://www.cybercns.com 
-* Additional containers to come
-  * Honeypot container or VM
+* Additional stuff to come
+  * Honeypot container or VM?
   * Backup software maybe?
+  * Domain Imposter scanning https://github.com/tfournet/imp_hunter
   
 Network traffic is automatically collected and passed into Perch for analysis 
