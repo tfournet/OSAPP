@@ -18,5 +18,7 @@ This installs the OS and a Cockpit plugin to start the configuration via a web U
   * Honeypot container or VM?
   * Backup software maybe?
   * Domain Imposter scanning https://github.com/tfournet/imp_hunter
+  * Swap in different firewall distributions - CheckPoint? 
+  
   
 Network traffic is automatically collected and passed into Perch for analysis 
