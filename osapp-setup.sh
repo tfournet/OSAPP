@@ -18,7 +18,8 @@ echo "Beginning Setup"
 
 
 # Install cockpit addons
-dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
+dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording python3-certbot-nginx 
+
 
 #testing mode############
 #alias sudo="echo sudo"

@@ -1,0 +1,9 @@
+{
+    "version": 0,
+    "tools": {
+        "osapp-setup": {
+            "label": "Firewall Interface",
+            "path": "firewall.html"
+        }
+    }
+}

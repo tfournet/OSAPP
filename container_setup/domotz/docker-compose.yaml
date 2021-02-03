@@ -1,0 +1,13 @@
+version: "3"
+services:
+  cybercnsvulnerabilityagent:
+    container_name: domotz
+    privileged: true
+    image: "docker.io/domotz/domotzpro-agent-amd64"
+    network_mode: host
+    # environment:
+    #   LOG_LEVEL: "debug"
+    restart: always
+    volumes:
+      - \"/usr/local/containers/domotz/etc/etc:/opt/domotz/etc"
+

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-plugindir="/usr/local/share/cockpit/osapp"
+plugindir="/usr/local/share/cockpit/"
 mkdir -p $plugindir 
 
 
