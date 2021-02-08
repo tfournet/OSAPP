@@ -1,6 +1,8 @@
 #!/bin/sh
 
 hostname="{{hostname}}"
+cwa_LocID={{cwa_LocID}}
+
 echo "Setting system hostname to $hostname"
 hostnamectl set-hostname $hostname 
 
@@ -10,7 +12,9 @@ redis-cli del pf.setup.nic.ens34
 service network restart 
 
 echo "Installing Labtech Agent"
-ping google.com -c1 && /usr/local/bin/install-labtech.sh {{cwa_LocID}} 
+if [[ $cwa_LocID -gt 0 ]]; then 
+    ping google.com -c4 && /usr/local/bin/install-labtech.sh $cwa_LocID 
+fi 
 
 echo "Setting up VXLAN Traffic Collector"
 grep -q 'perch_vxlan.sh' /etc/rc.local || echo '/usr/local/bin/perch_vxlan.sh' >> /etc/rc.local 
