@@ -3,13 +3,14 @@
 custAbbr=$1
 custTld=$2
 siteSubnet=$3
-extDns1=$4
-extDns2=$5
-cybercns_hostname=$6
-cybercns_siteId=$7
-Perch_URL=$8
-OPNSense_URL=$9
-OPNSense_SHA256=${10}
+siteName=$4
+extDns1=$5
+extDns2=$6
+cybercns_hostname=$7
+cybercns_siteId=$8
+Perch_URL=$9
+OPNSense_URL=${10}
+OPNSense_SHA256=${11}
 
 mkdir -p /etc/osapp 
 conf="/etc/osapp/osapp-vars.conf"
@@ -19,20 +20,20 @@ osapp_inst=\"/usr/local/osapp\"
 vpool=\"pool0\"
 nicBondType=\"bond\"
 VLAN_IDs=(10 20 30 40 50 60 70 80 100)
-OSAPP_Hostname=
-Perch_Hostname=
-OPNsense_Hostname= 
+OSAPP_Hostname=\"$custAbbr-$siteName-OSAPP\"
+Perch_Hostname=\"$custAbbr-$siteName-Perch\"
+OPNsense_Hostname=\"$custAbbr-$siteName-FW\"
 OPNSense_VMName=\"OPNsense_Firewall\"
 Perch_VMName=\"Perch_Sensor\"
-custAbbr=\"$1\"
-custTld=\"$2\"
-siteSubnet=\"$3\"
-Allowed_DNS=(\"$4\" \"$5\")
-cybercns_hostname=\"$6\"
-cybercns_siteId=\"$7\"
-Perch_URL=\"$8\"
-OPNSense_URL=\"$9\"
-OPNSense_SHA256=\"${10}\"
+custAbbr=\"$custAbbr\"
+custTld=\"$custTld\"
+siteSubnet=\"$siteSubnet\"
+Allowed_DNS=(\"$extDns1\" \"$extDns2\")
+cybercns_hostname=\"$cybercns_hostname\"
+cybercns_siteId=\"$cybercns_siteId\"
+Perch_URL=\"$Perch_URL\"
+OPNSense_URL=\"$OPNSense_URL\"
+OPNSense_SHA256=\"$OPNSense_SHA256\"
 """ > $conf 
 
 tmpScript="/usr/local/bin/run-osapp-setup.sh"

@@ -5,9 +5,11 @@ services:
     privileged: true
     image: "docker.io/domotz/domotzpro-agent-amd64"
     network_mode: host
+    ports:
+      - "3000:3000"
     # environment:
     #   LOG_LEVEL: "debug"
     restart: always
     volumes:
-      - \"/usr/local/containers/domotz/etc/etc:/opt/domotz/etc"
+      - "/usr/local/containers/domotz/etc/etc:/opt/domotz/etc"
 
