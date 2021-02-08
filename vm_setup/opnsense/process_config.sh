@@ -2,17 +2,16 @@
 
 source /etc/osapp/osapp-vars.conf
 
-dnf -y install httpd
-systemctl enable --now httpd
 
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
 firewall-cmd --reload
 
-mkdir -p /var/www/html/opnsense
+webdir="/usr/share/nginx/html/opnsense"
+mkdir -p $webdir 
 
 input_config="/usr/local/osapp/vm_setup/opnsense/conf/config.xml"
-output_config="/var/www/html/opnsense/config.xml"
+output_config="$webdir/config.xml"
 
 perch_mac=$(virsh domiflist $Perch_VMName | grep br.20 | awk {'print $5'})
 
