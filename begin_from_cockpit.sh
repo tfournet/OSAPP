@@ -72,9 +72,10 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 ### Ready for Containers ### 
 /usr/local/osapp/container_setup/podman.sh
 
-# Create CyberCNS Container
-/usr/local/osapp/container_setup/cybercns/cybercns.sh 
-
+# Create CyberCNS Container if needed
+if [[ $(echo $cybercns_siteId) -eq 25 ]]; then 
+    /usr/local/osapp/container_setup/cybercns/cybercns.sh 
+fi
 
 echo "End Setup."
 rm -f /tmp/osapp-setup-running
