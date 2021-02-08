@@ -75,6 +75,8 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 # Create CyberCNS Container if needed
 if [[ $(echo $cybercns_siteId) -eq 25 ]]; then 
     /usr/local/osapp/container_setup/cybercns/cybercns.sh 
+else
+    echo "No valid CyberCNS Site ID specified."
 fi
 
 echo "End Setup."
