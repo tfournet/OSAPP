@@ -21,7 +21,7 @@ sed \
     -e "s/custdom.tld/$custTLD/g" \
     -e "s/\<rocommunity\>public\<\/rocommunity\>/\<rocommunity\>radermonitor\<\/rocommunity\>/g" \
     -e "s/10.10./10.$siteSubnet./g" \
-    -e "s/11:00:11:00:11:00/$perch_mac/g" \
+    -e "s#<mac>.*.</mac>#<mac>$perch_mac</mac>#g" \
     $input_config > $output_config 
 
 lines=$(wc -l $output_config | awk {'print $1'}) 
