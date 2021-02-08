@@ -35,8 +35,4 @@ echo -e "\n\n"
 /usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
 
 echo "" 
-echo "Waiting for VM to reboot"
-sleep 60 
-#echo "Stopping HTTPD"
-#systemctl stop httpd
-#systemctl disable httpd
+

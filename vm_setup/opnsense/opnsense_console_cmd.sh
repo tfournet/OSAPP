@@ -25,7 +25,7 @@ logfile=$3
 shift 3
 cmd="$@"
 #echo $cmd
-expfile="/tmp/test-expect-script-$$.exp"
+expfile="/tmp/opnsense-expect-script-$$.exp"
 
 #echo "command: $cmd"
 cat <<EOF > $expfile
@@ -56,11 +56,12 @@ send "exit\n"
 send "\n"
 expect "Enter an option:"
 send "6\n"
-expect ": "
+expect "u/N]: "
+send "Y\n"
 send "Y\n"
 send "\n"
-send "\n"
 send -- "^]"
+expect "login: "
 close
 EOF
 
