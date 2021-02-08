@@ -29,8 +29,9 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf -y install azure-cli epel-release git jq
 sudo dnf -y update
  
+setsebool -P httpd_can_network_connect on
 
-killall firefox
+killall firefox 2>/dev/null 
 
 # Download secured files
 clear

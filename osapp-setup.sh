@@ -31,7 +31,7 @@ sudo $osapp_inst/get_variables.sh
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 
-
+setsebool -P httpd_can_network_connect on
 
 # Set up Hypervisor
 
