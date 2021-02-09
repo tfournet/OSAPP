@@ -32,7 +32,7 @@ pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 echo -e "\n\n"
 
-/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $password  $cmd 
+/usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
 
 echo "" 
 

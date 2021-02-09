@@ -2,6 +2,8 @@
 
 # Stolen from https://gist.github.com/Naoya-Horiguchi/9425402
 
+source /etc/osapp/osapp-vars.conf 
+
 which expect >/dev/null || dnf -y install expect 
 
 usage() {
@@ -22,7 +24,7 @@ LANG=C
 target=$1
 pass=$2
 logfile=$3
-newpass=$4
+newpass=$password 
 shift 3
 cmd="$@"
 #echo $cmd
