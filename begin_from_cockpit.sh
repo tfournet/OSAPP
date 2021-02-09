@@ -50,14 +50,14 @@ touch /tmp/osapp-setup-running
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
-cat /etc/osapp/osapp-vars.conf 
+grep -v ^password /etc/osapp/osapp-vars.conf 
 
 # Set root password
 echo $password | passwd --stdin root
 
 # Install OS addons
 dnf -y install epel-release
-dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
+dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording sshpass
 
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 

@@ -673,7 +673,7 @@
     <dnssec>1</dnssec>
     <forwarding>1</forwarding>
     <regdhcp>1</regdhcp>
-    <regdhcpdomain>custtld/regdhcpdomain>
+    <regdhcpdomain>custtld</regdhcpdomain>
     <local_zone_type>nodefault</local_zone_type>
   </unbound>
   <snmpd>
