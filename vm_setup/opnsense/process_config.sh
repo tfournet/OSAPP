@@ -15,11 +15,13 @@ output_config="$webdir/config.xml"
 
 perch_mac=$(virsh domiflist $Perch_VMName | grep br.20 | awk {'print $5'})
 
+echo $custTld 
+
 sed \
     -e "s/ZZZ-sitename-FW/$OPNsense_Hostname/g" \
     -e "s/sitename/$siteName/g" \
-    -e "s/custdom.tld/$custTLD/g" \
-    -e "s/\<rocommunity\>.*.\<\/rocommunity\>/\<rocommunity\>$snmpCommunity\<\/rocommunity\>/g" \
+    -e "s#custtld#$custTLD#g" \
+    -e "s#<rocommunity>.*.</rocommunity>#<rocommunity>$snmpCommunity</rocommunity>#g" \
     -e "s/10.10./10.$siteSubnet./g" \
     -e "s#<mac>.*.</mac>#<mac>$perch_mac</mac>#g" \
     $input_config > $output_config 
@@ -34,5 +36,13 @@ echo -e "\n\n"
 
 /usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense $cmd 
 
+echo "Adding SSH Key to OPNsense"
+
+
+echo "Updating OPNsense"
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 opnsense-update 
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 /usr/local/opnsense/scripts/firmware/sync.sh
 echo "" 
+sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.1
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "shutdown -r now"
 

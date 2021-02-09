@@ -17,7 +17,7 @@ mkdir -p /etc/osapp
 
 conf="/etc/osapp/osapp-vars.conf"
 
-echo """cust
+echo """
 osapp_inst=\"/usr/local/osapp\"
 vpool=\"pool0\"
 nicBondType=\"bond\"

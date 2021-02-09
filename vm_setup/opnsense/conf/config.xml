@@ -213,7 +213,7 @@
     <secondaryconsole>video</secondaryconsole>
     <optimization>normal</optimization>
     <hostname>ZZZ-sitename-FW</hostname>
-    <domain>custdom.tld</domain>
+    <domain>custtld</domain>
     <group>
       <name>admins</name>
       <description>System Administrators</description>
@@ -504,7 +504,7 @@
     <lan>
       <enable>1</enable>
       <gateway>10.10.10.1</gateway>
-      <domain>net.sitename.custdom.tld</domain>
+      <domain>net.sitename.custtld</domain>
       <denyunknown>1</denyunknown>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
@@ -521,7 +521,7 @@
     <opt1>
       <enable>1</enable>
       <gateway>10.10.20.1</gateway>
-      <domain>svr.sitename.custdom.tld</domain>
+      <domain>svr.sitename.custtld</domain>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
@@ -547,8 +547,8 @@
     <opt2>
       <enable>1</enable>
       <gateway>10.10.30.1</gateway>
-      <domain>ptr.sitename.custdom.tld</domain>
-      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <domain>ptr.sitename.custtld</domain>
+      <domainsearchlist>hosted.custtld</domainsearchlist>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <ddnsupdate>1</ddnsupdate>
       <numberoptions>
@@ -567,8 +567,8 @@
       <defaultleasetime>604800</defaultleasetime>
       <maxleasetime>691200</maxleasetime>
       <gateway>10.10.50.1</gateway>
-      <domain>pc.sitename.custdom.tld</domain>
-      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <domain>pc.sitename.custtld</domain>
+      <domainsearchlist>hosted.custtld</domainsearchlist>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <ddnsupdate>1</ddnsupdate>
       <numberoptions>
@@ -585,8 +585,8 @@
     <opt5>
       <enable>1</enable>
       <gateway>10.10.60.1</gateway>
-      <domain>iot.sitename.custdom.tld</domain>
-      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <domain>iot.sitename.custtld</domain>
+      <domainsearchlist>hosted.custtld</domainsearchlist>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
@@ -602,7 +602,7 @@
     <opt6>
       <enable>1</enable>
       <gateway>10.10.70.1</gateway>
-      <domain>guest.sitename.custdom.tld</domain>
+      <domain>guest.sitename.custtld</domain>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
@@ -618,7 +618,7 @@
     <opt7>
       <enable>1</enable>
       <gateway>10.10.80.1</gateway>
-      <domain>dvr.sitename.custdom.tld</domain>
+      <domain>dvr.sitename.custtld</domain>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
@@ -634,8 +634,8 @@
     <opt8>
       <enable>1</enable>
       <gateway>10.10.100.1</gateway>
-      <domain>voip.sitename.custdom.tld</domain>
-      <domainsearchlist>hosted.custdom.tld</domainsearchlist>
+      <domain>voip.sitename.custtld</domain>
+      <domainsearchlist>hosted.custtld</domainsearchlist>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
         <item/>
@@ -651,8 +651,8 @@
     <opt3>
       <enable>1</enable>
       <gateway>10.10.40.1</gateway>
-      <domain>dmz.sitename.custdom.com</domain>
-      <domainsearchlist>hosted.custdom.com</domainsearchlist>
+      <domain>dmz.sitename.custtld</domain>
+      <domainsearchlist>hosted.custtld</domainsearchlist>
       <denyunknown>1</denyunknown>
       <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
       <numberoptions>
@@ -673,6 +673,8 @@
     <dnssec>1</dnssec>
     <forwarding>1</forwarding>
     <regdhcp>1</regdhcp>
+    <regdhcpdomain>custtld/regdhcpdomain>
+    <local_zone_type>nodefault</local_zone_type>
   </unbound>
   <snmpd>
     <syslocation/>
