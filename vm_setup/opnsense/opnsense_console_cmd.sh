@@ -58,7 +58,7 @@ send "exit\n"
 send "\n"
 expect "Enter an option:"
 send "3\n"
-expect "y/N]: 
+expect "y/N]:" 
 send "Y\n"
 expect "Type a new password:"
 send "$newpass\n"
