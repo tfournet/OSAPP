@@ -50,6 +50,8 @@ touch /tmp/osapp-setup-running
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
 
+cat /etc/osapp/osapp-vars.conf 
+
 # Set root password
 echo $password | passwd --stdin root
 
