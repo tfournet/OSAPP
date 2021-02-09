@@ -59,29 +59,29 @@ dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 
 # Set up Hypervisor
-/usr/local/osapp/host_setup/host_kvm_setup.sh
+/usr/local/osapp/host_setup/host_kvm_setup.sh || exit 1
 
 # Set up Networking
 /usr/local/osapp/host_setup/host_networking.sh 2>/dev/null
 
 # Import Firewall VM(s)
-/usr/local/osapp/vm_setup/opnsense/create_opnsense.sh
+/usr/local/osapp/vm_setup/opnsense/create_opnsense.sh || exit 1
 
 # Import Perch VM
-/usr/local/osapp/vm_setup/perch/create_perch.sh
+/usr/local/osapp/vm_setup/perch/create_perch.sh || exit 1
 
 # Configure Firewall VM
-/usr/local/osapp/vm_setup/opnsense/process_config.sh 
+/usr/local/osapp/vm_setup/opnsense/process_config.sh  || exit 1
 
 # Boot Perch VM 
-/usr/local/osapp/vm_setup/perch/start_perch.sh 
+/usr/local/osapp/vm_setup/perch/start_perch.sh  || exit 1
 
 ### Ready for Containers ### 
-/usr/local/osapp/container_setup/podman.sh
+/usr/local/osapp/container_setup/podman.sh || exit 1
 
 # Create CyberCNS Container if needed
 if [[ $(echo $cybercns_siteId) -eq 25 ]]; then 
-    /usr/local/osapp/container_setup/cybercns/cybercns.sh 
+    /usr/local/osapp/container_setup/cybercns/cybercns.sh  || exit 1
 else
     echo "No valid CyberCNS Site ID specified, skipping container installation..."
 fi
