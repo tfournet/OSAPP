@@ -17,7 +17,7 @@ mkdir -p /etc/osapp
 
 conf="/etc/osapp/osapp-vars.conf"
 
-echo """
+echo """cust
 osapp_inst=\"/usr/local/osapp\"
 vpool=\"pool0\"
 nicBondType=\"bond\"
@@ -37,6 +37,7 @@ cybercns_siteId=\"$cybercns_siteId\"
 Perch_URL=\"$Perch_URL\"
 OPNSense_URL=\"$OPNSense_URL\"
 OPNSense_SHA256=\"$OPNSense_SHA256\"
+snmpCommunity=\"radermonitor\"
 password=\"$password\"
 """ > $conf 
 

@@ -32,7 +32,7 @@ restorecon -R -v /home/perch/.ssh
 restorecon -R -v /home/prairiefire/.ssh 
 
 echo "Updating Perch"
-yum -y install perch_siem
+yum -y install perch_siem tcpdump 
 perch_update_cmd="/opt/perch/setup/perch_update_yum"
 $perch_update_cmd
 ln -s $perch_update_cmd /etc/cron.weekly/
