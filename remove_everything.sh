@@ -2,6 +2,11 @@
 
 source /etc/osapp/osapp-vars.conf
 
+virsh destroy $Perch_VMName
+virsh destroy $OPNSense_VMName
+virsh undefine $Perch_VMName
+virsh undefine $OPNSense_VMName
+
 docker ps | grep -v ^CONTAINER | awk {'print $1'} | xargs docker stop
 docker images | grep -v ^REPO | awk {'print $3'} | xargs docker rmi 
 
