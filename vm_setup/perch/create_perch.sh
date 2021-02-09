@@ -12,7 +12,7 @@ mkdir -p /tmp/perch
 dlfile="/tmp/perch/perch_sensor.ova"
 
 while ! [ -f $dlfile ]; do 
-  wget -O $dlfile $Perch_URL
+  curl -o $dlfile $Perch_URL
 done
 
 echo "Extracting and Converting Image..."
