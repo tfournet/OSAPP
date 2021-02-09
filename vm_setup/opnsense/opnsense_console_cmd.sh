@@ -92,7 +92,8 @@ close
 EOF
 
 #cat $expfile
-expect $expfile > /dev/null
+echo "Running $expfile"
+expect $expfile #> /dev/null
 gawk '
     BEGIN { window = 0 }
     /end_exec_given_command/ { window = 0 }
