@@ -22,6 +22,7 @@ LANG=C
 target=$1
 pass=$2
 logfile=$3
+newpass=$4
 shift 3
 cmd="$@"
 #echo $cmd
@@ -34,6 +35,7 @@ cat <<EOF > $expfile
 set timeout 100
 set target $target
 set pass $pass
+set newpass $newpass
 log_file -noappend $logfile
 
 spawn virsh console --force $target
@@ -55,8 +57,16 @@ send "$cmd\n"
 send "exit\n"
 send "\n"
 expect "Enter an option:"
+send "3\n"
+expect "y/N]: 
+send "Y\n"
+expect "Type a new password:"
+send "$newpass\n"
+expect "Confirm new password:"
+send "$newpass\n"
+expect "Enter an option:"
 send "6\n"
-expect "u/N]: "
+expect "y/N]: "
 send "Y\n"
 send "Y\n"
 send "\n"

@@ -11,8 +11,10 @@ cybercns_siteId=$8
 Perch_URL=$9
 OPNSense_URL=${10}
 OPNSense_SHA256=${11}
+password=${12}
 
 mkdir -p /etc/osapp 
+
 conf="/etc/osapp/osapp-vars.conf"
 
 echo """
@@ -20,6 +22,7 @@ osapp_inst=\"/usr/local/osapp\"
 vpool=\"pool0\"
 nicBondType=\"bond\"
 VLAN_IDs=(10 20 30 40 50 60 70 80 100)
+siteName=\"$siteName\"
 OSAPP_Hostname=\"$custAbbr-$siteName-OSAPP\"
 Perch_Hostname=\"$custAbbr-$siteName-Perch\"
 OPNsense_Hostname=\"$custAbbr-$siteName-FW\"
@@ -34,6 +37,7 @@ cybercns_siteId=\"$cybercns_siteId\"
 Perch_URL=\"$Perch_URL\"
 OPNSense_URL=\"$OPNSense_URL\"
 OPNSense_SHA256=\"$OPNSense_SHA256\"
+password=\"$password\"
 """ > $conf 
 
 tmpScript="/usr/local/bin/run-osapp-setup.sh"
@@ -44,6 +48,9 @@ touch /tmp/osapp-setup-running
 
 source /etc/osapp/osapp-vars.conf 
 echo "Beginning Setup"
+
+# Set root password
+echo $password | passwd --stdin root
 
 # Install OS addons
 dnf -y install epel-release
@@ -78,6 +85,8 @@ if [[ $(echo $cybercns_siteId) -eq 25 ]]; then
 else
     echo "No valid CyberCNS Site ID specified, skipping container installation..."
 fi
+
+sed -ie "s/^password.*//g" /etc/osapp/osapp-vars.conf 
 
 echo "End Setup."
 rm -f /tmp/osapp-setup-running

@@ -7,6 +7,8 @@ myVersion=11
 
 clear
 echo "Beginning configuration. Version $myVersion"
+nm-online 
+
 
 killall yelp
 

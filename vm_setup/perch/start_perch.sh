@@ -35,6 +35,7 @@ perch_hostname=$Perch_Hostname
 
 sed -e "s/{{cwa_LocID}}/$cwa_LocID/g"  \
     -e "s/{{hostname}}/$perch_hostname/g" \
+    -e "s/{{password}}/$password/g" \
     $osapp_inst/vm_setup/perch/perch_firstboot.sh > /tmp/perch_firstboot.sh
     chmod a+x /tmp/perch_firstboot.sh  
 sed -e "s/{{sitesubnet}}/$siteSubnet/g" \
@@ -43,9 +44,9 @@ sed -e "s/{{sitesubnet}}/$siteSubnet/g" \
 virt-customize -d $Perch_VMName --copy-in /tmp/ifcfg-eth0:/etc/sysconfig/network-scripts/
 virt-customize -d $Perch_VMName --copy-in $osapp_inst/install-labtech.sh:/usr/local/bin/
 virt-customize -d $Perch_VMName --copy-in $osapp_inst/vm_setup/perch/perch_vxlan.sh:/usr/local/bin/
-virt-customize -d $Perch_VMName --copy-in /tmp/perch_firstboot.sh:/usr/local/bin/
+virt-customize -d $Perch_VMName --copy-in /tmp/perch_firstboot.sh:/usr/local/sbin/
 
-firstboot_cmds="/usr/local/bin/perch_firstboot.sh"
+firstboot_cmds="/usr/local/sbin/perch_firstboot.sh"
 virt-customize -d $Perch_VMName --firstboot-command "$firstboot_cmds"
     
 # Start VM
