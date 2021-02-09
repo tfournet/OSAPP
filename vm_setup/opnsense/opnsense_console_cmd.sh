@@ -30,7 +30,9 @@ cmd="$@"
 #echo $cmd
 expfile="/tmp/opnsense-expect-script-$$.exp"
 
-#echo "command: $cmd"
+echo "Command: $cmd"
+echo "Writing to $expfile"
+
 cat <<EOF > $expfile
 #!/usr/bin/expect
 
