@@ -52,7 +52,6 @@ virt-customize -d $Perch_VMName --firstboot-command "$firstboot_cmds"
 # Start VM
 virsh start $Perch_VMName
 virsh autostart $Perch_VMName
-sleep 2
 
 echo -n "Waiting for $Perch_VMName to boot.."
 sleep 10
@@ -65,11 +64,14 @@ chmod a+x /etc/rc.local
 
 /usr/local/bin/perch_monitor.sh
 
-sleep 20 
+sleep 50 
 #echo -e "\nLogging into Perch Sensor. Please complete the configuration wizard for the site."
 #echo "ssh  perch@10.$siteSubnet.20.3 "
 
 sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.3
 sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no perch@10.10.20.3
 sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no prairiefire@10.10.20.3
+sshpass -p $password ssh root@10.10.20.3 "echo "$password" | passwd perch --stdin"
+sshpass -p $password ssh root@10.10.20.3 "echo "$password" | passwd prairiefire --stdin"
+
 #rm -rf /tmp/perch

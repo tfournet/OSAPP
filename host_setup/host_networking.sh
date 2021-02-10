@@ -60,6 +60,9 @@ for vlan in ${VLAN_IDs[@]}; do
    nmcli connection add type bridge con-name $bridgeName ifname $bridgeName stp no autoconnect yes
    nmcli connection add type vlan con-name $if ifname $if dev $bondName id $vlan master $bridgeName connection.autoconnect yes
    
+   ipaddr="10.$siteSubnet.$vlan.2/24"
+   nmcli connection modify $bridgeName ipv4.method manual ipv4.address $ipaddr
+   
    nmcli connection down $bridgeName
    nmcli connection up   $bridgeName
 
@@ -97,11 +100,11 @@ vlan="10"
 ifname=br.$vlan
 ipaddr="192.168.1.2/24"
 echo "for $ifname to $ipaddr"
-nmcli connection modify $ifname ipv4.method manual ipv4.address $ipaddr
+#nmcli connection down   $ifname
+nmcli connection modify $ifname ipv4.method manual +ipv4.address $ipaddr save no 
 #for dns_server in ${Allowed_DNS[@]}; do
 #    nmcli connection modify $ifname +ipv4.dns $dns_server
 #done
-nmcli connection down   $ifname
 nmcli connection up     $ifname 
 #ifconfig $ifname $tempip 255.255.255.0
 
