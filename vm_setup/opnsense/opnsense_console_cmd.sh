@@ -71,6 +71,8 @@ expect "Confirm new password:"
 send "$newpass\n"
 expect "Enter an option:"
 send "6\n"
+expect "y/N]:" 
+send "Y\n"
 expect "login: "
 close
 EOF
