@@ -47,20 +47,23 @@ echo "Next we will log into $OPNSense_VMName and run: $cmd"
 #sshpass -p 'raderChangeme!' scp $output_config root@192.168.1.1:/conf/config.xml
 #sshpass -p 'raderChangeme!' ssh -o StrictHostKeyChecking=no root@192.168.42.1 "shutdown -r now"
 
-while ! (ping 10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
+opn_ip="10.$siteSubnet.20.1"
+while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating OPNsense & Rebooting"
-sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "opnsense-update ; shutdown -r now"
-while ! (ping 10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip"opnsense-update ; shutdown -r now"
+sleep 20 
+while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating Plugins"
-sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "uptime; /usr/local/opnsense/scripts/firmware/sync.sh"
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "uptime; echo 'Syncing Plugins....' ; /usr/local/opnsense/scripts/firmware/sync.sh"
 
 echo "Rebooting"
-sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "shutdown -r now"
-while ! (ping 10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "shutdown -r now"
+sleep 20 
+while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
-sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.1
+sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@$opn_ip
 
 
 
