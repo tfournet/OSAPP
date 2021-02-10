@@ -12,6 +12,7 @@ mkdir -p /tmp/perch
 dlfile="/tmp/perch/perch_sensor.ova"
 
 while ! [ -f $dlfile ]; do 
+  echo "Downloading Perch OVA"
   curl -o $dlfile $Perch_URL
 done
 

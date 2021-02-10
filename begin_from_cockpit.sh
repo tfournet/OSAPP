@@ -57,7 +57,11 @@ echo $password | passwd --stdin root
 
 # Install OS addons
 dnf -y install epel-release
-dnf -y install cockpit-dashboard cockpit-machine cockpit-session-recording sshpass
+dnf clean all
+dnf -y update 
+pkgs="cockpit-dashboard cockpit-machine cockpit-session-recording sshpass"
+echo "Installing RPM Packages: $pkgs"
+dnf -y install $pkgs
 
 cat /dev/zero | ssh-keygen -t rsa -q -N ""
 

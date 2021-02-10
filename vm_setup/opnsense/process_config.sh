@@ -45,3 +45,5 @@ echo ""
 sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.1
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "shutdown -r now"
 
+shpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "shutdown -r now"
+
