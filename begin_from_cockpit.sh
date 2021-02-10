@@ -59,7 +59,7 @@ echo $password | passwd --stdin root
 dnf -y install epel-release
 dnf clean all
 dnf -y update 
-pkgs="cockpit-dashboard cockpit-machine cockpit-session-recording sshpass"
+pkgs="cockpit-dashboard cockpit-session-recording sshpass"
 echo "Installing RPM Packages: $pkgs"
 dnf -y install $pkgs
 

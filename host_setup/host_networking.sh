@@ -62,7 +62,7 @@ for vlan in ${VLAN_IDs[@]}; do
    
    ipaddr="10.$siteSubnet.$vlan.2/24"
    nmcli connection modify $bridgeName ipv4.method manual ipv4.address $ipaddr
-   
+
    nmcli connection down $bridgeName
    nmcli connection up   $bridgeName
 
@@ -94,18 +94,19 @@ nmcli connection down   $ifname
 nmcli connection up     $ifname 
 
 ## Set IP for this host on VLAN 10 (temporary)
-tempip="192.168.1.2"
-echo -n "Setting Temporary IP Address $temip"
+#tempip="192.168.1.2"
+#cho -n "Setting Temporary IP Address $temip"
 vlan="10"
 ifname=br.$vlan
 ipaddr="192.168.1.2/24"
-echo "for $ifname to $ipaddr"
+#echo "for $ifname to $ipaddr"
 #nmcli connection down   $ifname
-nmcli connection modify $ifname ipv4.method manual +ipv4.address $ipaddr save no 
+nmcli connection modify $ifname ipv4.method manual +ipv4.address $ipaddr #save no 
 #for dns_server in ${Allowed_DNS[@]}; do
 #    nmcli connection modify $ifname +ipv4.dns $dns_server
 #done
-nmcli connection up     $ifname 
+nmcli connection down $ifname
+nmcli connection up   $ifname 
 #ifconfig $ifname $tempip 255.255.255.0
 
 sleep 10 

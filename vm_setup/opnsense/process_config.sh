@@ -29,30 +29,36 @@ sed \
 lines=$(wc -l $output_config | awk {'print $1'}) 
 echo "Wrote $lines lines to $output_config"
 
-cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml && cat /conf/config.xml"
+cmd="curl -o /conf/config.xml http://192.168.1.2/opnsense/config.xml ; cat /conf/config.xml"
 pass="opnsense"
 echo "Next we will log into $OPNSense_VMName and run: $cmd"
 
 /usr/local/osapp/vm_setup/opnsense/opnsense_console_cmd.sh $OPNSense_VMName $pass /tmp/exp-opnsense "$cmd" 
 
-echo "Restarting $OPNSense_VMName"
-virsh shutdown $OPNSense_VMName
-sleep 30
-virsh start $OPNSense_VMName
-sleep 90
+#echo "Restarting $OPNSense_VMName"
+#virsh shutdown $OPNSense_VMName
+#sleep 30
+#virsh start $OPNSense_VMName
+#sleep 90
 
-echo "Adding SSH Key to OPNsense"
+#echo "Adding SSH Key to OPNsense"
 
+#alias sshcon="ssh -O StrictHostKeyChecking=no"
+#sshpass -p 'raderChangeme!' scp $output_config root@192.168.1.1:/conf/config.xml
+#sshpass -p 'raderChangeme!' ssh -o StrictHostKeyChecking=no root@192.168.42.1 "shutdown -r now"
+
+while ! (10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating OPNsense & Rebooting"
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "opnsense-update ; shutdown -r now"
-sleep 90
+while ! (10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
+
 echo "Updating Plugins"
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "uptime; /usr/local/opnsense/scripts/firmware/sync.sh"
-echo "" 
+
 echo "Rebooting"
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@10.10.20.1 "shutdown -r now"
-sleep 90
+while ! (10.10.20.1 -c 20) ; do echo offline ; sleep 1 ; done
 
 sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.1
 
