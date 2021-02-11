@@ -50,6 +50,6 @@ Network traffic is automatically collected and passed into Perch for analysis
 4. After installation, browse to the Cockpit URL showing in the login motd.
 5. Run the 'Setup OSAPP' applet in there
 6. Enter the desired variables for the location. The idea is that IP addressing will be based on the following schema:
-   10.<Site Identifier>.VLAN.Device 
+   `10.<Site Identifier>.<VLAN>.<Device>`
 7. The process takes about 15 minutes, during which it downloads images of OPNsense and Perch, configures and boots them to the specified parameters
 
