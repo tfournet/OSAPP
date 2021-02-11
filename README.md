@@ -33,7 +33,10 @@ This installs the OS and a Cockpit plugin to start the configuration via a web U
 * Perch Sensor
   * Traffic is mirrored from each VLAN to the Perch Sensor using the host operating system
   * Logging data (syslog) streamed from firewall and host server
-  * Palo-style Blocklists from Perch 
+  * Palo-style Blocklists from Perch to OPNsense config
+* Containers using Podman
+  * Currently this runs a CyberCNS container if a site identifier is entered
+
 
 
 
@@ -46,3 +49,7 @@ Network traffic is automatically collected and passed into Perch for analysis
 3. Press Ctrl-X to boot with these parameters
 4. After installation, browse to the Cockpit URL showing in the login motd.
 5. Run the 'Setup OSAPP' applet in there
+6. Enter the desired variables for the location. The idea is that IP addressing will be based on the following schema:
+   10.<Site Identifier>.VLAN.Device 
+7. The process takes about 15 minutes, during which it downloads images of OPNsense and Perch, configures and boots them to the specified parameters
+
