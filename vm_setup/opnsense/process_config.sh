@@ -63,7 +63,7 @@ sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "shutdown -r n
 sleep 20 
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
-sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@$opn_ip
+sshpass -p $password ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no root@$opn_ip
 
 
 

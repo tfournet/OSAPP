@@ -68,9 +68,9 @@ sleep 50
 #echo -e "\nLogging into Perch Sensor. Please complete the configuration wizard for the site."
 #echo "ssh  perch@10.$siteSubnet.20.3 "
 
-sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no root@10.10.20.3
-sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no perch@10.10.20.3
-sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no prairiefire@10.10.20.3
+sshpass -p $password ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no root@10.10.20.3
+sshpass -p $password ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no perch@10.10.20.3
+sshpass -p $password ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no prairiefire@10.10.20.3
 sshpass -p $password ssh root@10.10.20.3 "echo "$password" | passwd perch --stdin"
 sshpass -p $password ssh root@10.10.20.3 "echo "$password" | passwd prairiefire --stdin"
 
