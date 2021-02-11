@@ -3,7 +3,7 @@ OnSite Appliance
 
 kickstart url: https://git.io/Jt8MR
 
-temporary kickstart password is: 'raderChangeme!'
+temporary kickstart password is: 'osapp-changeme'
 
 This builds an all-in-one appliance for a [mostly] Open Source network security stack for small offices. 
 
