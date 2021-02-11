@@ -112,3 +112,8 @@ nmcli connection up   $ifname
 sleep 10 
 echo -e "\n\n\n"
 nmcli connection show
+
+echo "Configuring Logging to Perch"
+perch="10.$siteSubnet.20.3"
+echo "*.*     @$perch" > /etc/rsyslog.d/perch.conf
+systemctl restart rsyslog 

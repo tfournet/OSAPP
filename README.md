@@ -22,6 +22,21 @@ This installs the OS and a Cockpit plugin to start the configuration via a web U
   * Domain Imposter scanning https://github.com/tfournet/imp_hunter
   * Swap in different firewall distributions - CheckPoint? 
   
+## Features ##
+* Isolated Networks via VLAN: Networking Equipment | Servers | Printers | DMZ | Desktops | IoT | DVR | VoIP
+* Whitelisting required for inter-VLAN traffic, a minimal set of rules are preconfigured
+* OPNsense Firewall
+  * Graphical representations of live traffic
+  * User-friendly configuration of firewalls, routing, VPN, IPS
+  * Sensei IPS blocks malicious traffic and allows application control / web filters
+  * Dual WAN Interfaces passed directly through from host
+* Perch Sensor
+  * Traffic is mirrored from each VLAN to the Perch Sensor using the host operating system
+  * Logging data (syslog) streamed from firewall and host server
+  * Palo-style Blocklists from Perch 
+
+
+
   
 Network traffic is automatically collected and passed into Perch for analysis 
 
