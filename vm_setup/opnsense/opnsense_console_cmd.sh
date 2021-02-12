@@ -86,3 +86,5 @@ gawk '
     { if (window == 1) { print } }
     /start_exec_given_command/ { window = 1 }
 ' $logfile
+
+rm -f $expfile 
