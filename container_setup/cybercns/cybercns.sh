@@ -8,7 +8,7 @@ source /etc/osapp/osapp-vars.conf
 cybercns_hostname=$cybercns_hostname
 cybercns_site_id=$cybercns_siteId
 
-containerdir=/usr/local/containers/cybercns-$cybercns_site_id
+containerdir="/usr/local/containers/cybercns-$cybercns_siteId"
 
 compose="podman-compose" 
 
@@ -26,12 +26,12 @@ recon_randomize: True
 ' >> $containerdir/salt/minion.d/minion.conf
 
 echo """
-version: "3"
+version: \"3\"
 services:
   cybercnsvulnerabilityagent:
     container_name: cyberCNSAgent
     privileged: true
-    image: "docker.io/cybercnssaas/cybercns_agent"
+    image: \"docker.io/cybercnssaas/cybercns_agent\"
     network_mode: host
     # environment:
     #   LOG_LEVEL: "debug"
