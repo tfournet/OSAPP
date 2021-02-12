@@ -51,7 +51,7 @@ opn_ip="10.$siteSubnet.20.1"
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating OPNsense & Rebooting"
-sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip"opnsense-update ; shutdown -r now"
+sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "opnsense-update ; shutdown -r now"
 sleep 20 
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
