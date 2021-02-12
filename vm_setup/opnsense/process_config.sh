@@ -48,11 +48,12 @@ echo "Next we will log into $OPNSense_VMName and run: $cmd"
 #sshpass -p 'raderChangeme!' ssh -o StrictHostKeyChecking=no root@192.168.42.1 "shutdown -r now"
 
 opn_ip="10.$siteSubnet.20.1"
+sleep 30
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating OPNsense & Rebooting"
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "opnsense-update ; shutdown -r now"
-sleep 20 
+sleep 30
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 echo "Updating Plugins"
@@ -60,7 +61,7 @@ sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "uptime; echo 
 
 echo "Rebooting"
 sshpass -p $password ssh -o StrictHostKeyChecking=no root@$opn_ip "shutdown -r now"
-sleep 20 
+sleep 30
 while ! (ping $opn_ip -c 20) ; do echo offline ; sleep 1 ; done
 
 sshpass -p $password ssh-copy-id -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no root@$opn_ip
