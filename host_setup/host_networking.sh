@@ -71,8 +71,15 @@ for vlan in ${VLAN_IDs[@]}; do
    virsh net-define --file /tmp/$bridgeName.xml  
    virsh net-autostart $bridgeName
    virsh net-start $bridgeName
+
+   fw_zone="vlan"$vlan 
+   firewall-cmd --permanent --new-zone=$fw_zone
+   firewall-cmd --zone=$fw_zone --change-interface=$if 
 done
 
+firewall-cmd --zone=vlan20 --add-service=ssh
+firewall-cmd --zone=vlan20 --add-service=http
+firewall-cmd --zone=vlan20 --add-service=https
 virsh net-list
 
 
@@ -108,6 +115,7 @@ nmcli connection modify $ifname ipv4.method manual +ipv4.address $ipaddr #save n
 nmcli connection down $ifname
 nmcli connection up   $ifname 
 #ifconfig $ifname $tempip 255.255.255.0
+
 
 sleep 10 
 echo -e "\n\n\n"

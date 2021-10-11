@@ -8,10 +8,12 @@ extDns1=$5
 extDns2=$6
 cybercns_hostname=$7
 cybercns_siteId=$8
-Perch_URL=$9
-OPNSense_URL=${10}
-OPNSense_SHA256=${11}
-password=${12}
+cybercns_clientId=$9
+cybercns_clientSecret=${10}
+Perch_URL=${11}
+}OPNSense_URL=${12}
+OPNSense_SHA256=${13}
+password=${14}
 
 mkdir -p /etc/osapp 
 
@@ -87,11 +89,19 @@ cat /dev/zero | ssh-keygen -t rsa -q -N ""
 /usr/local/osapp/container_setup/podman.sh || exit 1
 
 # Create CyberCNS Container if needed
-if [[ $(echo $cybercns_siteId) -eq 25 ]]; then 
-    /usr/local/osapp/container_setup/cybercns/cybercns.sh  || exit 1
+#if [[ $(echo $cybercns_siteId) -eq 25 ]]; then 
+#    /usr/local/osapp/container_setup/cybercns/cybercns.sh  || exit 1
+#else
+#    echo "No valid CyberCNS Site ID specified, skipping container installation..."
+#fi
+
+# Install CyberCNS
+if [[ $(echo $cybercns_siteId) -eq 25 ]]; then
+    curl -k https://cybercnsagent.s3.amazonaws.com/cybercnsagent_linux -O; chmod +x cybercnsagent_linux; sudo ./cybercnsagent_linux -c $cybercns_siteId -a $cybercns_clientId -s $cybercns_clientSecret -b $cybercns_hostname -i Probe
 else
-    echo "No valid CyberCNS Site ID specified, skipping container installation..."
+    echo "No valid CyberCNS Site ID specified, skipping CyberCNS Probe installation..."
 fi
+
 
 sed -ie "s/^password.*//g" /etc/osapp/osapp-vars.conf 
 

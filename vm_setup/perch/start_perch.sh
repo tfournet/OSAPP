@@ -3,7 +3,7 @@
 source /etc/osapp/osapp-vars.conf 
 
 # fixing up filesystem
-guestfish -rw -a /var/lib/libvirt/pool0/Perch_Sensor-sda \
+guestfish --rw -a /var/lib/libvirt/pool0/Perch_Sensor-sda \
 : run \
   : list-filesystems \
   : mount /dev/centos/root / \

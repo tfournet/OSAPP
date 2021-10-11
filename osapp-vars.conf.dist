@@ -29,8 +29,12 @@ siteName="site"
 #OPNSense_SHA256="72cbffe3bba4884586c8ded8dbca4cf30fb34a094602e5f681efde2deea595c6"
 
 # nano 21RC
-OPNSense_URL="https://mirror.wdc1.us.leaseweb.net/opnsense/releases/21.1/OPNsense-21.1-OpenSSL-nano-amd64.img.bz2"
-OPNSense_SHA256="e5116c5037f4b4bbc68708e8f14ce023508ccf585164b778d6c158f170ea202f"
+#OPNSense_URL="https://mirror.wdc1.us.leaseweb.net/opnsense/releases/21.1/OPNsense-21.1-OpenSSL-nano-amd64.img.bz2"
+#OPNSense_SHA256="e5116c5037f4b4bbc68708e8f14ce023508ccf585164b778d6c158f170ea202f"
+
+# nano 21.7
+OPNSense_URL="https://mirror.wdc1.us.leaseweb.net/opnsense/releases/mirror/OPNsense-21.7.1-OpenSSL-nano-amd64.img.bz2"
+OPNSense_SHA256="106b483993f252e27dfd5064f57b2800e68274cf036445a97308107144e601f9"
 
 OPNSense_VMName="OPNsense_Firewall"
 
@@ -41,7 +45,7 @@ Perch_VMName="Perch_Sensor"
 
 
 ######### CyberCNS #########
-cybercns_hostname="radersolutions.mycybercns.com"
+cybercns_hostname="cybercns.rader.technology"
 cybercns_custId="abc"
 cybercns_siteId="def"
 

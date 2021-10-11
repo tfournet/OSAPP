@@ -7,6 +7,8 @@ const extDns1 = document.getElementById("extDns1");
 const extDns2 = document.getElementById("extDns2");
 const cybercns_hostname = document.getElementById("cybercns_hostname");
 const cybercns_siteId = document.getElementById("cybercns_siteId");
+const cybercns_clientId = document.getElementById("cybercns_clientId");
+const cybercns_clientSecret = document.getElementById("cybercns_clientSecret");
 const Perch_URL = document.getElementById("Perch_URL");
 const OPNSense_URL = document.getElementById("OPNSense_URL");
 const OPNSense_SHA256 = document.getElementById("OPNSense_SHA256");
@@ -15,7 +17,7 @@ const result = document.getElementById("result");
 const button = document.getElementById("config");
 
 function setup_run() {
-    cockpit.spawn(["/usr/local/osapp/begin_from_cockpit.sh", custAbbr.value, custTld.value, siteSubnet.value, siteName.value, extDns1.value, extDns2.value, cybercns_hostname.value, cybercns_siteId.value, Perch_URL.value, OPNSense_URL.value, OPNSense_SHA256.value, password.value])
+    cockpit.spawn(["/usr/local/osapp/begin_from_cockpit.sh", custAbbr.value, custTld.value, siteSubnet.value, siteName.value, extDns1.value, extDns2.value, cybercns_hostname.value, cybercns_siteId.value, cybercns_clientId.value, cybercns_clientSecret.value, Perch_URL.value, OPNSense_URL.value, OPNSense_SHA256.value, password.value])
         .stream(setup_output)
         .then(setup_success)
         .catch(setup_fail);
